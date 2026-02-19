@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak Kami - Selera Prima Food</title>
+    <style>
+        :root {
+            --primary: #eb2525;
+            --secondary: #af1e1e;
+            --background: #ffffff;
+            --foreground: #020817;
+            --muted: #f1f5f9;
+            --muted-foreground: #64748b;
+            --border: #e2e8f0;
+            --input: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: #f8fafc; color: var(--foreground); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* HEADER & NAVBAR */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            border-bottom: 1px solid var(--border);
+            background-color: var(--background); 
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .nav-container {
+            display: flex;
+            height: 64px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--foreground);
+        }
+
+        .logo {
+            display: flex;
+            height: 40px;
+            width: 40px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .brand-text { font-size: 20px; font-weight: bold; }
+        .brand-text span { color: var(--foreground); }
+
+        .desktop-nav { display: none; align-items: center; gap: 4px; }
+        @media (min-width: 1024px) { .desktop-nav { display: flex; } }
+
+        .nav-link {
+            text-decoration: none;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 6px;
+            color: var(--muted-foreground);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--muted);
+            color: var(--primary);
+        }
+
+        .nav-link.active, .mobile-nav-link.active {
+        background-color: var(--muted) !important;
+        color: var(--primary) !important;
+        font-weight: 700;
+        }
+
+        /* Mobile Toggle */
+        .mobile-toggle {
+            display: block;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            color: var(--foreground);
+        }
+        @media (min-width: 1024px) { .mobile-toggle { display: none; } }
+
+        .mobile-nav {
+            display: none;
+            border-top: 1px solid var(--border);
+            background-color: white;
+            padding: 16px;
+        }
+        .mobile-nav.open { display: block; }
+        .mobile-nav-list { display: flex; flex-direction: column; gap: 4px; }
+        .mobile-nav-link {
+            text-decoration: none;
+            padding: 10px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 6px;
+            color: var(--muted-foreground);
+            cursor: pointer;
+        }
+        .mobile-nav-link.active { background: var(--muted); color: var(--primary); }
+        .mobile-nav-link:hover { background: var(--muted); color: var(--primary); }
+        
+        /* Hero Kontak */
+        .hero-contact {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 80px 0;
+            color: white;
+        }
+        .hero-contact h1 { font-size: 3rem; font-weight: 800; margin-bottom: 16px; }
+        .hero-contact p { font-size: 1.25rem; opacity: 0.9; max-width: 600px; }
+
+        /* Grid Layout */
+        .contact-section { padding: 60px 0; }
+        .contact-grid {
+            display: grid;
+            gap: 32px;
+            grid-template-columns: 1fr;
+        }
+        @media (min-width: 1024px) {
+            .contact-grid { grid-template-columns: repeat(5, 1fr); }
+            .info-col { grid-column: span 2; }
+            .form-col { grid-column: span 3; }
+        }
+
+        /* Info Cards */
+        .info-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .info-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        
+        .icon-box {
+            width: 44px; height: 44px;
+            background: rgba(37,99,235,0.1);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Form Styling */
+        .card-form {
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
+        }
+        .form-group { margin-bottom: 16px;}
+        .form-row { display: grid; gap: 16px; margin-bottom: 16px;}
+        @media (min-width: 640px) { .form-row { grid-template-columns: 1fr 1fr; } }
+        
+        label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+        input, textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+            transition: 0.2s;
+        }
+        input:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(37,99,235,0.1); }
+        
+        .btn-submit {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-submit:hover { background: var(--secondary); transform: translateY(-1px); }
+
+        /* Map Placeholder */
+        .map-box {
+            margin-top: 48px;
+            background: var(--muted);
+            height: 250px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--border);
+            color: var(--muted-foreground);
+            text-align: center;
+        }
+
+        /* Animation */
+        .fade-up { animation: fadeUp 0.5s ease-out forwards; opacity: 0; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* FOOTER STYLES */
+        footer {
+            background-color: var(--foreground);
+            color: var(--background);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 48px;
+            padding-bottom: 24px;
+        }
+
+        .footer-grid {
+            display: grid;
+            gap: 32px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (min-width: 1024px) {
+            .footer-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            justify-content: flex-start;
+        }
+
+        .footer-logo-box {
+            height: 40px;
+            width: 40px;
+            background-color: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            color: var(--primary-foreground);
+        }
+
+        .brand-name { font-size: 18px; font-weight: bold; text-align: left; margin: 0;}
+        .brand-name span { color: var(--primary-foreground); }
+
+        .desc {
+            font-size: 14px;
+            opacity: 0.7;
+            line-height: 1.6;
+            margin: 0;
+            text-align: left;
+            max-width: 300px;
+        }
+
+        footer h4 {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 0 16px 0;
+        }
+
+        .link-list, .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .link-list a {
+            color: inherit;
+            text-decoration: none;
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+
+        .link-list a:hover {
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.7;
+        }
+
+        .social-flex {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-btn {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            background-color: rgba(37, 99, 235, 0.2);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .footer-bottom {
+            margin-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 24px;
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container container">
+            <a href="/" class="brand">
+                <div class=""><img src="LOGO SPF.png" alt="Logo Selera Prima Food" width="90" height="45"></div>
+                <span class="brand-text">Selera Prima <span>Food</span></span>
+            </a>
+
+            <div class="desktop-nav">
+                <a href="beranda.html" class="nav-link active">Beranda</a>
+                <a href="tentang-kami.html" class="nav-link">Tentang Kami</a>
+                <a href="produk.html" class="nav-link">Produk</a>
+                <a href="artikel.html" class="nav-link">Artikel</a>
+                <a href="resep.html" class="nav-link">Resep</a>
+                <a href="faq.html" class="nav-link">FAQ</a>
+                <a href="kontak.html" class="nav-link">Kontak Kami</a>
+            </div>
+
+            <button class="mobile-toggle" id="menu-btn">
+                <svg id="icon-menu" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                <svg id="icon-close" style="display:none" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </nav>
+
+        <div class="mobile-nav" id="mobile-menu">
+            <div class="mobile-nav-list">
+                <a href="beranda.html" class="mobile-nav-link active">Beranda</a>
+                <a href="tentang-kami.html" class="mobile-nav-link">Tentang Kami</a>
+                <a href="produk.html" class="mobile-nav-link">Produk</a>
+                <a href="artikel.html" class="mobile-nav-link">Artikel</a>
+                <a href="resep.html" class="mobile-nav-link">Resep</a>
+                <a href="faq.html" class="mobile-nav-link">FAQ</a>
+                <a href="kontak.html" class="mobile-nav-link">Kontak Kami</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-contact">
+            <div class="container">
+                <h1 class="fade-up">Kontak Kami</h1>
+                <p class="fade-up" style="animation-delay: 0.1s;">Hubungi kami untuk informasi lebih lanjut tentang produk dan kerjasama</p>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="info-col">
+                        <div class="info-card fade-up" style="animation-delay: 0.2s; text-align:left;align-items: center;">
+                            <div class="icon-box">📞</div>
+                            <div>
+                                <h3 style="font-size: 16px;">Telepon</h3>
+                                <p style="font-size: 14px;">+62 21 1234 5678</p>
+                                <p style="font-size: 12px; color: var(--muted-foreground);">Senin - Jumat, 08:00 - 17:00</p>
+                            </div>
+                        </div>
+                        <div class="info-card fade-up" style="animation-delay: 0.3s; text-align:left;align-items: center;">
+                            <div class="icon-box">✉️</div>
+                            <div>
+                                <h3 style="font-size: 16px;">Email</h3>
+                                <p style="font-size: 14px;">info@seleraprimafood.com</p>
+                                <p style="font-size: 12px; color: var(--muted-foreground);">Respon dalam 1x24 jam</p>
+                            </div>
+                        </div>
+                        <div class="info-card fade-up" style="animation-delay: 0.4s; text-align:left;align-items: center;">
+                            <div class="icon-box">📍</div>
+                            <div>
+                                <h3 style="font-size: 16px;">Alamat</h3>
+                                <p style="font-size: 14px;">Jl. Tengsaw No.168, Tarikolot, Kec. Citeureup, Kabupaten Bogor, Jawa Barat 16811</p>
+                                <p style="font-size: 12px; color: var(--muted-foreground);">Kantor pusat dan pabrik</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-col fade-up" style="animation-delay: 0.2s;">
+                        <div class="card-form">
+                            <h2 style="margin-bottom: 24px;">Kirim Pesan</h2>
+                            <form id="contactForm">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Nama</label>
+                                        <input type="text" placeholder="Nama lengkap" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="email" placeholder="email@contoh.com" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Telepon</label>
+                                        <input type="text" placeholder="+62...">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Subjek</label>
+                                        <input type="text" placeholder="Subjek pesan" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Pesan</label>
+                                    <textarea rows="5" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                                </div>
+                                <button type="submit" class="btn-submit">Kirim Pesan</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-box fade-up" style="animation-delay: 0.5s;">
+                    <div>
+                        <p style="font-size: 32px; margin-bottom: 8px;">📍</p>
+                        <p>Peta Lokasi — Jakarta, Indonesia</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="brand-logo">
+                        <div class="footer-logo">
+                            <img src="LOGO SPF.png" alt="Logo Selera Prima Food" width="90" height="45"></div>
+                        <span class="brand-name">Selera Prima <span>Food</span></span>
+                    </div>
+                    <p class="desc">
+                        Produsen makanan beku berkualitas tinggi. Nugget, sosis, olahan daging, dan lebih banyak lagi untuk keluarga Indonesia.
+                    </p>
+                </div>
+
+                <div>
+                    <h4>Navigasi</h4>
+                    <div class="link-list">
+                        <a href="beranda.html">Beranda</a>
+                        <a href="tentang-kami.html">Tentang Kami</a>
+                        <a href="produk.html">Produk</a>
+                        <a href="artikel.html">Artikel</a>
+                        <a href="resep.html">Resep</a>
+                        <a href="faq.html">FAQ</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Kontak</h4>
+                    <div class="contact-list">
+                        <div class="contact-item">📞 +62 21 1234 5678</div>
+                        <div class="contact-item">📧 info@seleraprimafood.com</div>
+                        <div class="contact-item">📍 Jakarta, Indonesia</div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Media Sosial</h4>
+                    <div class="social-flex">
+                        <a href="https://www.instagram.com/seleraprimafood/" class="social-btn" title="instagram">in</a>
+                        <a href="https://www.tiktok.com/@selera.prima.food?_r=1&_t=ZS-92pw6FuTrbJ" class="social-btn" title="tiktok">f</a>
+                        <a href="https://youtube.com/@seleraprimafood?si=_RjDQkebhil65yr2" class="social-btn" title="youtube">yt</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                &copy; 2026 Selera Prima Food. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simulasi Toast dari komponen sebelumnya
+        const handleFormSubmit = (e) => {
+            e.preventDefault();
+            
+            // Di sini lo bisa panggil fungsi toast() yang pernah kita buat
+            alert("Pesan Terkirim! Terima kasih telah menghubungi kami. Kami akan segera membalas pesan Anda.");
+            
+            e.target.reset();
+        };
+
+        document.getElementById('contactForm').addEventListener('submit', handleFormSubmit);
+
+        // Navbar Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconMenu = document.getElementById('icon-menu');
+        const iconClose = document.getElementById('icon-close');
+
+        menuBtn.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('open');
+            
+            // Toggle Icons
+            iconMenu.style.display = isOpen ? 'none' : 'block';
+            iconClose.style.display = isOpen ? 'block' : 'none';
+        });
+
+        // Simulasikan aktif link pas diklik
+        const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                if(window.innerWidth < 1024) {
+                    mobileMenu.classList.remove('open');
+                    iconMenu.style.display = 'block';
+                    iconClose.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+    <script>
+    // Aktifkan link navbar berdasarkan halaman saat ini
+    document.addEventListener('DOMContentLoaded', () => {
+    // 1. Ambil nama file dari URL (misal: produk.html)
+    const currentPath = window.location.pathname.split("/").pop();
+    
+    // 2. Cari semua link di navbar
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+
+    navLinks.forEach(link => {
+        // Bersihin class active dulu biar gak dobel
+        link.classList.remove('active');
+        
+        const href = link.getAttribute('href');
+
+        // 3. Logika pencocokan
+        if (currentPath === href) {
+            link.classList.add('active');
+        } 
+        // Kalau di beranda (index.html atau kosong)
+        else if ((currentPath === "" || currentPath === "index.html") && href === "index.html") {
+            link.classList.add('active');
+        }
+        });
+    });
+    </script>
+
+</body>
+</html>

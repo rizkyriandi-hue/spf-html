@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspirasi Resep - Selera Prima Food</title>
+    <style>
+        :root {
+            --primary: #eb2525;
+            --secondary: #af1e1e;
+            --background: #ffffff;
+            --foreground: #020817;
+            --muted: #f1f5f9;
+            --muted-foreground: #64748b;
+            --border: #e2e8f0;
+            --accent: #eff6ff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: #f8fafc; color: var(--foreground); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* HEADER & NAVBAR */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            border-bottom: 1px solid var(--border);
+            background-color: var(--background); 
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .nav-container {
+            display: flex;
+            height: 64px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--foreground);
+        }
+
+        .logo {
+            display: flex;
+            height: 40px;
+            width: 40px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .brand-text { font-size: 20px; font-weight: bold; }
+        .brand-text span { color: var(--foreground); }
+
+        .desktop-nav { display: none; align-items: center; gap: 4px; }
+        @media (min-width: 1024px) { .desktop-nav { display: flex; } }
+
+        .nav-link {
+            text-decoration: none;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 6px;
+            color: var(--muted-foreground);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--muted);
+            color: var(--primary);
+        }
+
+        .nav-link.active, .mobile-nav-link.active {
+        background-color: var(--muted) !important;
+        color: var(--primary) !important;
+        font-weight: 700;
+        }
+
+        /* Mobile Toggle */
+        .mobile-toggle {
+            display: block;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            color: var(--foreground);
+        }
+        @media (min-width: 1024px) { .mobile-toggle { display: none; } }
+
+        .mobile-nav {
+            display: none;
+            border-top: 1px solid var(--border);
+            background-color: white;
+            padding: 16px;
+        }
+        .mobile-nav.open { display: block; }
+        .mobile-nav-list { display: flex; flex-direction: column; gap: 4px; }
+        .mobile-nav-link {
+            text-decoration: none;
+            padding: 10px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 6px;
+            color: var(--muted-foreground);
+            cursor: pointer;
+        }
+        .mobile-nav-link.active { background: var(--muted); color: var(--primary); }
+
+        /* Hero */
+        .hero-resep {
+            position: relative;
+            background: url(resep.png) no-repeat center center/cover;
+            padding: 80px 0;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Pattern Overlay */
+        .hero-resep::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: var(--foreground);
+            opacity: 0.2;
+        }
+
+        .hero-resep h1 { font-size: 3rem; font-weight: 800; margin-bottom: 16px; color: rgb(255, 255, 255); text-shadow: 2px 2px 4px rgba(71,71,71,0.5); }
+        .hero-resep p { font-size: 1.25rem; opacity: 100%; max-width: 600px; color: rgb(255, 255, 255); text-shadow: 1px 1px 2px rgba(71,71,71,0.5);}
+        .hero-resep h1, .hero-resep p { position: relative; z-index: 10; text-align: left;}
+
+        /* Filter Tabs */
+        .filter-section { padding: 48px 0 24px; }
+        .filter-container { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+        .filter-btn {
+            padding: 8px 18px;
+            border-radius: 9999px;
+            border: 1px solid var(--border);
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+        .cat-dropdown {
+        padding: 8px 18px;
+        background-color: white;
+        color: var(--foreground);
+        transition: 0.3s;
+        outline: none;
+        }
+
+        /* Biar pas kategorinya dipilih, warnanya jadi merah kayak tombol active */
+        .cat-dropdown:not([value="Semua"]) {
+        background-color: var(--primary-foreground);
+        }
+
+        /* Grid */
+        .resep-grid {
+            display: grid;
+            gap: 24px;
+            grid-template-columns: repeat(1, 1fr);
+        }
+        @media (min-width: 768px) { .resep-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .resep-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        /* Card */
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid var(--border);
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        
+        .card-header {
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--muted-foreground);
+            font-size: 64px;
+        }
+        
+        .card-body { padding: 20px; }
+        .badge {
+            background: var(--muted);
+            color: var(--muted-foreground);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        .card-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+        .meta { display: flex; gap: 15px; font-size: 12px; color: var(--muted-foreground); margin-top: 15px; }
+
+        /* Detail View */
+        #detail-view { display: none; padding: 40px 0; }
+        .back-btn {
+            background: none; border: none; color: var(--muted-foreground);
+            cursor: pointer; font-weight: 600; margin-bottom: 24px; display: flex; align-items: center; gap: 8px;
+        }
+        .back-btn:hover { color: var(--primary); }
+        .detail-content { max-width: 700px; margin: 0 auto; background: white; padding: 32px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .detail-hero { height: 200px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 80px; background: var(--accent); margin-bottom: 24px; }
+        
+        .steps { list-style: none; margin-top: 20px; }
+        .step-item { display: flex; gap: 16px; margin-bottom: 16px; align-items: flex-start; }
+        .step-number {
+            width: 28px; height: 28px; background: var(--primary); color: white;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; font-weight: bold; font-size: 14px;
+        }
+
+       /* FOOTER */
+        footer {
+            background-color: var(--foreground);
+            color: var(--background);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 48px;
+            padding-bottom: 24px;
+        }
+
+        .footer-grid {
+            display: grid;
+            gap: 32px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (min-width: 1024px) {
+            .footer-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            justify-content: flex-start;
+        }
+
+        .footer-logo-box {
+            height: 40px;
+            width: 40px;
+            background-color: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            color: var(--primary-foreground);
+        }
+
+        .brand-name { font-size: 18px; font-weight: bold; text-align: left; margin: 0;}
+        .brand-name span { color: var(--primary-foreground); }
+
+        .desc {
+            font-size: 14px;
+            opacity: 0.7;
+            line-height: 1.6;
+            margin: 0;
+            text-align: left;
+            max-width: 300px;
+        }
+
+        footer h4 {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 0 16px 0;
+        }
+
+        .link-list, .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .link-list a {
+            color: inherit;
+            text-decoration: none;
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+
+        .link-list a:hover {
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.7;
+        }
+
+        .social-flex {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-btn {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            background-color: rgba(37, 99, 235, 0.2);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .footer-bottom {
+            margin-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 24px;
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container container">
+            <a href="/" class="brand">
+                <div class=""><img src="LOGO SPF.png" alt="Logo Selera Prima Food" width="90" height="45"></div>
+                <span class="brand-text">Selera Prima <span>Food</span></span>
+            </a>
+
+            <div class="desktop-nav">
+                <a href="beranda.html" class="nav-link active">Beranda</a>
+                <a href="tentang-kami.html" class="nav-link">Tentang Kami</a>
+                <a href="produk.html" class="nav-link">Produk</a>
+                <a href="artikel.html" class="nav-link">Artikel</a>
+                <a href="resep.html" class="nav-link">Resep</a>
+                <a href="faq.html" class="nav-link">FAQ</a>
+                <a href="kontak.html" class="nav-link">Kontak Kami</a>
+            </div>
+
+            <button class="mobile-toggle" id="menu-btn">
+                <svg id="icon-menu" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                <svg id="icon-close" style="display:none" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </nav>
+
+        <div class="mobile-nav" id="mobile-menu">
+            <div class="mobile-nav-list">
+                <a href="beranda.html" class="mobile-nav-link active">Beranda</a>
+                <a href="tentang-kami.html" class="mobile-nav-link">Tentang Kami</a>
+                <a href="produk.html" class="mobile-nav-link">Produk</a>
+                <a href="artikel.html" class="mobile-nav-link">Artikel</a>
+                <a href="resep.html" class="mobile-nav-link">Resep</a>
+                <a href="faq.html" class="mobile-nav-link">FAQ</a>
+                <a href="kontak.html" class="mobile-nav-link">Kontak Kami</a>
+            </div>
+        </div>
+    </header>
+
+    <main>        
+        <div id="list-view">
+            <section class="hero-resep">
+                    <div class="container">
+                        <h1>Resep Spesial</h1>
+                        <p>Inspirasi masakan lezat menggunakan produk Selera Prima Food</p>
+                    </div>
+            </section>
+
+            <section class="filter-section">
+                <div class="container">
+                    <div class="filter-container">
+                            <button class="filter-btn active" onclick="filterResep('Semua', this)">Semua</button>
+                            <button class="filter-btn" onclick="filterResep('Nugget', this)">Nugget</button>
+                            <button class="filter-btn" onclick="filterResep('Sosis', this)">Sosis</button>
+                            <button class="filter-btn" onclick="filterResep('Olahan Daging', this)">Olahan Daging</button>
+                        </div>
+                    <div class="resep-grid" id="resep-grid"></div>
+                </div>
+            </section>
+        </div>
+
+        <section class="container" id="detail-view">
+            <button class="back-btn" onclick="showList()">← Kembali ke Resep</button>
+            <div id="detail-container">
+                </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="brand-logo">
+                        <div class="footer-logo">
+                            <img src="LOGO SPF.png" alt="Logo Selera Prima Food" width="90" height="45"></div>
+                        <span class="brand-name">Selera Prima <span>Food</span></span>
+                    </div>
+                    <p class="desc">
+                        Produsen makanan beku berkualitas tinggi. Nugget, sosis, olahan daging, dan lebih banyak lagi untuk keluarga Indonesia.
+                    </p>
+                </div>
+
+                <div>
+                    <h4>Navigasi</h4>
+                    <div class="link-list">
+                        <a href="beranda.html">Beranda</a>
+                        <a href="tentang-kami.html">Tentang Kami</a>
+                        <a href="produk.html">Produk</a>
+                        <a href="artikel.html">Artikel</a>
+                        <a href="resep.html">Resep</a>
+                        <a href="faq.html">FAQ</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Kontak</h4>
+                    <div class="contact-list">
+                        <div class="contact-item"><span>📞</span> +62 21 1234 5678</div>
+                        <div class="contact-item"><span>📧</span> info@seleraprimafood.com</div>
+                        <div class="contact-item"><span>📍</span> Jl. Tengsaw No.168, Tarikolot, Kec. Citeureup, Kabupaten Bogor, Jawa Barat 16811</div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Media Sosial</h4>
+                    <div class="social-flex">
+                        <a href="https://www.instagram.com/seleraprimafood/" class="social-btn" title="instagram">in</a>
+                        <a href="https://www.tiktok.com/@selera.prima.food?_r=1&_t=ZS-92pw6FuTrbJ" class="social-btn" title="tiktok">f</a>
+                        <a href="https://youtube.com/@seleraprimafood?si=_RjDQkebhil65yr2" class="social-btn" title="youtube">yt</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                &copy; 2026 Selera Prima Food. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const recipes = [
+            { id: 1, title: "Nugget Goreng Tepung Crispy", desc: "Nugget ayam dibalut tepung crispy renyah", time: "15 menit", servings: "4 porsi", category: "Nugget", Image: "1.png", pos:"center 10%", steps: ["Siapkan nugget Selera Prima", "Celupkan ke kocokan telur", "Balut dengan tepung roti", "Goreng hingga golden brown"] },
+            { id: 2, title: "Sosis Bakar Madu", desc: "Sosis sapi panggang dengan saus madu dan mustard", time: "20 menit", servings: "6 porsi", category: "Sosis", Image: "madu.jpg", steps: ["Belah sosis menjadi dua", "Olesi dengan campuran madu dan mustard", "Panggang di atas grill", "Sajikan dengan saus sambal"] },
+            { id: 3, title: "Saikoro Beef Teriyaki", desc: "Saikoro sapi dimasak dengan saus teriyaki ala Jepang", time: "25 menit", servings: "3 porsi", category: "Olahan Daging", Image: "bock.png", steps: ["Marinasi saikoro dengan saus teriyaki", "Panaskan wajan dengan sedikit minyak", "Masak saikoro hingga matang merata", "Taburi wijen"] },
+            { id: 4, title: "Beef Slice Sukiyaki", desc: "Beef slice tipis dimasak sukiyaki dengan sayuran", time: "30 menit", servings: "4 porsi", category: "Olahan Daging", Image: "slice.jpeg", steps: ["Siapkan kuah sukiyaki", "Tata sayuran dan tahu di panci", "Tambahkan beef slice", "Masak hingga mendidih"] },
+            { id: 5, title: "Nugget Asam Manis", desc: "Nugget ayam dengan saus asam manis nanas", time: "20 menit", servings: "4 porsi", category: "Nugget", Image: "1.png", steps: ["Goreng nugget", "Buat saus asam manis", "Campurkan nugget", "Sajikan"] },
+        ];
+
+        function renderGrid(data) {
+            const container = document.getElementById('resep-grid');
+            container.innerHTML = '';
+            data.forEach(r => {
+                container.innerHTML += `
+                    <div class="card" onclick="showDetail(${r.id})">
+                        <div class="card-header" style="padding:0; overflow:hidden;">
+                            <img src="${r.Image}" alt="${r.title}" style="width:100%; height:auto; object-fit:cover; padding-bottom:auto;"/>
+                        </div>            
+
+                        <div class="card-body">
+                            <span class="badge">${r.category}</span>
+                            <h3 class="card-title">${r.title}</h3>
+                            <p style="font-size:14px; color:#64748b;">${r.desc}</p>
+                            <div class="meta">
+                                <span>⏱️ ${r.time}</span>
+                                <span>👥 ${r.servings}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function filterResep(cat, btn) {
+            // Perbaiki selector ke .filter-btn biar warna merahnya pindah
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const filtered = cat === 'Semua' ? recipes : recipes.filter(r => r.category === cat);
+            renderGrid(filtered);
+        }
+
+        // Pastikan fungsi showDetail dan showList pake ID yang bener
+        function showDetail(id) {
+            const r = recipes.find(item => item.id === id);
+            document.getElementById('list-view').style.display = 'none';
+            document.getElementById('detail-view').style.display = 'block';
+            
+            document.getElementById('detail-container').innerHTML = `
+                <div class="detail-content">
+                    <div class="detail-hero" style="padding:0; overflow:hidden;">
+                        <img src="${r.Image}" alt="${r.title}" style="width:100%; height:100%; object-fit:cover; padding:center"/>
+                    </div>
+                    <span class="badge">${r.category}</span>
+                    <h2 style="font-size:28px; margin-bottom:10px;">${r.title}</h2>
+                    <div class="meta" style="margin-bottom:30px;">
+                        <span>⏱️ Waktu: ${r.time}</span>
+                        <span>👥 Porsi: ${r.servings}</span>
+                    </div>
+                    <h3>Langkah Memasak:</h3>
+                    <ul class="steps">
+                        ${r.steps.map((s, i) => `
+                            <li class="step-item" style="align-items:center;">
+                                <div class="step-number">${i+1}</div>
+                                <div style="color:#475569;">${s}</div>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `;
+            window.scrollTo(0,0);
+        }
+
+        function showList() {
+            document.getElementById('detail-view').style.display = 'none';
+            document.getElementById('list-view').style.display = 'block';
+        }
+        
+        // Render awal
+        renderGrid(recipes);
+
+        // Navbar Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconMenu = document.getElementById('icon-menu');
+        const iconClose = document.getElementById('icon-close');
+
+        menuBtn.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('open');
+            
+            // Toggle Icons
+            iconMenu.style.display = isOpen ? 'none' : 'block';
+            iconClose.style.display = isOpen ? 'block' : 'none';
+        });
+
+        // Simulasikan aktif link pas diklik
+        const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                if(window.innerWidth < 1024) {
+                    mobileMenu.classList.remove('open');
+                    iconMenu.style.display = 'block';
+                    iconClose.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+    <script>
+    // Aktifkan link navbar berdasarkan halaman saat ini
+    document.addEventListener('DOMContentLoaded', () => {
+    // 1. Ambil nama file dari URL (misal: produk.html)
+    const currentPath = window.location.pathname.split("/").pop();
+    
+    // 2. Cari semua link di navbar
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+
+    navLinks.forEach(link => {
+        // Bersihin class active dulu biar gak dobel
+        link.classList.remove('active');
+        
+        const href = link.getAttribute('href');
+
+        // 3. Logika pencocokan
+        if (currentPath === href) {
+            link.classList.add('active');
+        } 
+        // Kalau di beranda (index.html atau kosong)
+        else if ((currentPath === "" || currentPath === "index.html") && href === "index.html") {
+            link.classList.add('active');
+        }
+        });
+    });
+    </script>
+
+</body>
+</html>

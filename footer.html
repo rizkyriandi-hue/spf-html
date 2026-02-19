@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Selera Prima Food</title>
+    <style>
+        :root {
+            --primary: #2563eb; /* Biru primary */
+            --primary-foreground: #ffffff;
+            --foreground: #0f172a; /* Warna gelap footer */
+            --background: #ffffff;
+        }
+
+        body { margin: 0; font-family: sans-serif; }
+
+        footer {
+            background-color: var(--foreground);
+            color: var(--background);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 48px;
+            padding-bottom: 24px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Grid Layout */
+        .footer-grid {
+            display: grid;
+            gap: 32px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (min-width: 1024px) {
+            .footer-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        /* Brand Section */
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .logo-box {
+            height: 40px;
+            width: 40px;
+            background-color: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .brand-name {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .brand-name span { color: var(--primary); }
+
+        .desc {
+            font-size: 14px;
+            opacity: 0.7;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Nav & Contact Sections */
+        h4 {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 0 16px 0;
+        }
+
+        .link-list, .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .link-list a {
+            color: inherit;
+            text-decoration: none;
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+
+        .link-list a:hover {
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.7;
+        }
+
+        /* Social Icons */
+        .social-flex {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-btn {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            background-color: rgba(37, 99, 235, 0.2);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Bottom Bar */
+        .footer-bottom {
+            margin-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 24px;
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="brand-logo">
+                        <div class="logo-box">SP</div>
+                        <span class="brand-name">Selera Prima <span>Food</span></span>
+                    </div>
+                    <p class="desc">
+                        Produsen makanan beku berkualitas tinggi. Nugget, sosis, olahan daging, dan lebih banyak lagi untuk keluarga Indonesia.
+                    </p>
+                </div>
+
+                <div>
+                    <h4>Navigasi</h4>
+                    <div class="link-list">
+                        <a href="#">Beranda</a>
+                        <a href="#">Tentang Kami</a>
+                        <a href="#">Produk</a>
+                        <a href="#">Artikel</a>
+                        <a href="#">Resep</a>
+                        <a href="#">FAQ</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Kontak</h4>
+                    <div class="contact-list">
+                        <div class="contact-item">📞 +62 21 1234 5678</div>
+                        <div class="contact-item">📧 info@seleraprimafood.com</div>
+                        <div class="contact-item">📍 Jakarta, Indonesia</div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Media Sosial</h4>
+                    <div class="social-flex">
+                        <a href="#" class="social-btn">FB</a>
+                        <a href="#" class="social-btn">IG</a>
+                        <a href="#" class="social-btn">YT</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                &copy; 2026 Selera Prima Food. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

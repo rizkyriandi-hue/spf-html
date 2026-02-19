@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selera Prima Food - Navbar</title>
+    <style>
+        :root {
+            --primary: #eb2525;
+            --primary-foreground: #ffffff;
+            --background: rgba(255, 255, 255, 0.95);
+            --foreground: #020817;
+            --border: #e2e8f0;
+            --muted-foreground: #64748b;
+            --muted: #f1f5f9;
+        }
+
+        body { margin: 0; font-family: sans-serif; height: 200vh; /* Biar bisa di-scroll */ }
+
+        /* Header Sticky & Backdrop Blur */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            width: 100%;
+            border-bottom: 1px solid var(--border);
+            background-color: var(--background);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+            display: flex;
+            height: 64px; /* h-16 */
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Brand/Logo */
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--foreground);
+        }
+
+        .logo {
+            display: flex;
+            height: 40px;
+            width: 40px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .brand-text {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .brand-text span { color: var(--primary); }
+
+        /* Desktop Nav */
+        .desktop-nav {
+            display: none;
+            align-items: center;
+            gap: 4px;
+        }
+
+        @media (min-width: 1024px) {
+            .desktop-nav { display: flex; }
+        }
+
+        .nav-link {
+            text-decoration: none;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 6px;
+            color: var(--muted-foreground);
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            background-color: var(--muted);
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            background-color: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+        }
+
+        /* Mobile Toggle Button */
+        .mobile-toggle {
+            display: block;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            color: var(--foreground);
+        }
+
+        @media (min-width: 1024px) {
+            .mobile-toggle { display: none; }
+        }
+
+        /* Mobile Nav Menu */
+        .mobile-nav {
+            display: none;
+            border-top: 1px solid var(--border);
+            background-color: white;
+            padding: 16px;
+        }
+
+        .mobile-nav.open { display: block; }
+
+        .mobile-nav-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .mobile-nav-link {
+            text-decoration: none;
+            padding: 10px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 6px;
+            color: var(--muted-foreground);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <nav class="container">
+            <a href="/" class="brand">
+                <div class=""><img src="LOGO SPF.png" alt="Logo Selera Prima Food"width="90" height="45"></div>
+                <span class="brand-text">Selera Prima <span>Food</span></span>
+            </a>
+
+            <div class="desktop-nav">
+                <a href="#" class="nav-link active">Beranda</a>
+                <a href="#" class="nav-link">Tentang Kami</a>
+                <a href="#" class="nav-link">Produk</a>
+                <a href="#" class="nav-link">Artikel</a>
+                <a href="#" class="nav-link">Resep</a>
+                <a href="#" class="nav-link">FAQ</a>
+                <a href="#" class="nav-link">Kontak Kami</a>
+            </div>
+
+            <button class="mobile-toggle" id="menu-btn">
+                <svg id="icon-menu" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                <svg id="icon-close" style="display:none" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </nav>
+
+        <div class="mobile-nav" id="mobile-menu">
+            <div class="mobile-nav-list">
+                <a href="#" class="mobile-nav-link active">Beranda</a>
+                <a href="#" class="mobile-nav-link">Tentang Kami</a>
+                <a href="#" class="mobile-nav-link">Produk</a>
+                <a href="#" class="mobile-nav-link">Artikel</a>
+                <a href="#" class="mobile-nav-link">Resep</a>
+                <a href="#" class="mobile-nav-link">FAQ</a>
+                <a href="#" class="mobile-nav-link">Kontak Kami</a>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconMenu = document.getElementById('icon-menu');
+        const iconClose = document.getElementById('icon-close');
+
+        menuBtn.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('open');
+            
+            // Toggle Icons
+            iconMenu.style.display = isOpen ? 'none' : 'block';
+            iconClose.style.display = isOpen ? 'block' : 'none';
+        });
+
+        // Simulasikan aktif link pas diklik
+        const links = document.querySelectorAll('.nav-link, .mobile-nav-link');
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                links.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                if(window.innerWidth < 1024) {
+                    mobileMenu.classList.remove('open');
+                    iconMenu.style.display = 'block';
+                    iconClose.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

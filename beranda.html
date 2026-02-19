@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selera Prima Food - Beranda</title>
+    <style>
+        :root {
+            --primary: #eb2525;
+            --secondary: #af1e1e;
+            --accent: #eff6ff;
+            --background: #ffffff;
+            --foreground: #020817;
+            --muted: #f1f5f9;
+            --muted-foreground: #64748b;
+            --border: #e2e8f0;
+            --primary-foreground: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--background); color: var(--foreground); overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; }
+
+        /* TOP SECTION */
+        .hero {
+            position: relative;
+            background: url("KELUARGA.png") center/cover no-repeat;
+            padding: 100px 0 140px;
+            color: var(--primary-foreground);
+            overflow: hidden;
+        }
+        /* Pattern Overlay */
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: var(--foreground);
+            opacity: 0.35;
+        }
+        .hero-content { max-width: 700px; position: relative; z-index: 10; }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 24px; text-shadow: 2px 2px 4px rgba(71, 71, 71, 0.5); }
+        .hero p { font-size: 1.25rem; opacity: 0.8; margin-bottom: 32px; line-height: 1.6; text-shadow: 1px 1px 2px rgba(71,71,71,0.5); }
+        .hero-btns { display: flex; gap: 16px; flex-wrap: wrap;}
+        
+        /* BUTTONS */
+        .btn { padding: 12px 32px; border-radius: 8px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; transition: 0.3s; font-size: 16px; }
+        .btn-white { background: white; color: var(--primary); }
+        .btn-white:hover { background: rgba(255,255,255,0.9); transform: translateY(-2px); }
+        .btn-outline { border: 1px solid rgba(255,255,255,0.3); color: white; }
+        .btn-outline:hover { background: rgba(255,255,255,0.1); }
+
+        /* STATS SECTION */
+        .stats { margin-top: -60px; position: relative; z-index: 20; }
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        @media (min-width: 768px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+        .stat-card { background: white; padding: 24px; border-radius: 12px; text-align: center; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        .stat-value { font-size: 2.5rem; font-weight: 800; color: var(--primary); display: block; }
+        .stat-label { font-size: 14px; color: var(--muted-foreground); margin-top: 4px; }
+
+        /* PRODUCTS SECTION */
+        .section-padding { padding: 80px 0; }
+        .section-header { text-align: center; margin-bottom: 48px; }
+        .section-header h2 { font-size: 2.25rem; font-weight: 700; margin-bottom: 12px; }
+        .section-header p { color: var(--muted-foreground); max-width: 600px; margin: 0 auto; }
+        
+        .product-grid { display: grid; gap: 16px; grid-template-columns: repeat(1, 1fr); }
+        @media (min-width: 640px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .product-grid { grid-template-columns: repeat(4, 1fr);gap: 20px; } }
+
+        .product-card { background: white; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); transition: 0.3s;max-width: 260px; margin: auto; }
+        .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+        .product-card:hover .product-img-box img { transform: scale(1.08);}
+        .product-img-box { height: auto; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; padding: 10px; overflow: hidden; font-size: 64px; }
+        .product-img-box img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.3s ease; }
+        .product-card:hover .product-img-box span { transform: scale(1.1); transition: 0.3s; }
+        .product-info { padding: 8px 16px 16px 16px; text-align: center; display: flex; flex-direction: column; align-items: center;}
+        .product-cat { font-size: 12px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em; }
+        .product-name { font-size: 20px; font-weight: 700; margin: 0 0 4px 0; }
+        .product-desc { font-size: 14px; color: var(--muted-foreground); line-height: 1.5; max-width: 200px; }
+
+        /* WHY US SECTION */
+        .why-us { background: var(--muted); }
+        .why-grid { display: grid; gap: 24px; grid-template-columns: repeat(1, 1fr); }
+        @media (min-width: 640px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .why-grid { grid-template-columns: repeat(4, 1fr); } }
+        .why-card { background: white; padding: 32px; border-radius: 12px; text-align: center;}
+        .why-card:hover .why-icon { transform: scale(1.08); transition: 0.3s; }
+        .why-icon { width: 56px; height: 56px; background: rgba(37,99,235,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: var(--primary); font-size: 24px; }
+
+        /* CTA SECTION */
+        .cta { background: linear-gradient(to right, var(--primary), var(--secondary)); color: white; text-align: center; padding: 64px 0; }
+        .cta h2 { font-size: 2.25rem; margin-bottom: 16px; }
+        .cta p { margin-bottom: 32px; opacity: 0.9; }
+
+        /* ANIMATION */
+        .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* HEADER & NAVBAR */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            border-bottom: 1px solid var(--border);
+            background-color: var(--background); 
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .nav-container {
+            display: flex;
+            height: 64px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--foreground);
+        }
+
+        .logo {
+            display: flex;
+            height: 40px;
+            width: 40px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .brand-text { font-size: 20px; font-weight: bold; }
+        .brand-text span { color: var(--foreground); }
+
+        .desktop-nav { display: none; align-items: center; gap: 4px; }
+        @media (min-width: 1024px) { .desktop-nav { display: flex; } }
+
+        .nav-link {
+            text-decoration: none;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 6px;
+            color: var(--muted-foreground);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--muted);
+            color: var(--primary);
+        }
+
+        .nav-link.active, .mobile-nav-link.active {
+        background-color: var(--muted) !important;
+        color: var(--primary) !important;
+        font-weight: 700;
+        }
+
+        /* Mobile Toggle */
+        .mobile-toggle {
+            display: block;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            color: var(--foreground);
+        }
+        @media (min-width: 1024px) { .mobile-toggle { display: none; } }
+
+        .mobile-nav {
+            display: none;
+            border-top: 1px solid var(--border);
+            background-color: white;
+            padding: 16px;
+        }
+        .mobile-nav.open { display: block; }
+        .mobile-nav-list { display: flex; flex-direction: column; gap: 4px; }
+        .mobile-nav-link {
+            text-decoration: none;
+            padding: 10px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 6px;
+            color: var(--muted-foreground);
+            cursor: pointer;
+        }
+        .mobile-nav-link.active { background: var(--muted); color: var(--primary); }
+
+
+        /* SHARED COMPONENTS */
+        .hero-bg {
+            background: linear-gradient(to bottom right, var(--primary), var(--secondary));
+            padding: 100px 0;
+            color: white;
+        }
+        .hero-bg h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 24px; line-height: 1.1; }
+        .btn { padding: 12px 32px; border-radius: 8px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; transition: 0.3s; cursor: pointer; border: none; font-size: 16px; }
+        .btn-white { background: white; color: var(--primary); }
+        .btn-outline { border: 1px solid rgba(255,255,255,0.3); color: white; }
+        .btn-primary { background: var(--primary); color: white; }
+        .grid-layout { display: grid; gap: 24px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+        .card { background: white; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); transition: 0.3s; cursor: pointer; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+        .card-img { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 64px; background: var(--accent); }
+        .card-body { padding: 20px; }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--foreground);
+            color: var(--background);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 48px;
+            padding-bottom: 24px;
+        }
+
+        .footer-grid {
+            display: grid;
+            gap: 32px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (min-width: 1024px) {
+            .footer-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            justify-content: flex-start;
+        }
+
+        .footer-logo-box {
+            height: 40px;
+            width: 40px;
+            background-color: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            color: var(--primary-foreground);
+        }
+
+        .brand-name { font-size: 18px; font-weight: bold; text-align: left; margin: 0;}
+        .brand-name span { color: var(--primary-foreground); }
+
+        .desc {
+            font-size: 14px;
+            opacity: 0.7;
+            line-height: 1.6;
+            margin: 0;
+            text-align: left;
+            max-width: 300px;
+        }
+
+        footer h4 {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 0 16px 0;
+        }
+
+        .link-list, .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .link-list a {
+            color: inherit;
+            text-decoration: none;
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+
+        .link-list a:hover {
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.7;
+        }
+
+        .social-flex {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-btn {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            background-color: rgba(37, 99, 235, 0.2);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .footer-bottom {
+            margin-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 24px;
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="nav-container container">
+            <a href="/" class="brand">
+                <div class=""><img src="LOGO SPF.png" alt="Logo Selera Prima Food" width="90" height="45"></div>
+                <span class="brand-text">Selera Prima <span>Food</span></span>
+            </a>
+
+            <div class="desktop-nav">
+                <a href="beranda.html" class="nav-link active">Beranda</a>
+                <a href="tentang-kami.html" class="nav-link">Tentang Kami</a>
+                <a href="produk.html" class="nav-link">Produk</a>
+                <a href="artikel.html" class="nav-link">Artikel</a>
+                <a href="resep.html" class="nav-link">Resep</a>
+                <a href="faq.html" class="nav-link">FAQ</a>
+                <a href="kontak.html" class="nav-link">Kontak Kami</a>
+            </div>
+
+            <button class="mobile-toggle" id="menu-btn">
+                <svg id="icon-menu" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                <svg id="icon-close" style="display:none" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </nav>
+
+        <div class="mobile-nav" id="mobile-menu">
+            <div class="mobile-nav-list">
+                <a href="beranda.html" class="mobile-nav-link active">Beranda</a>
+                <a href="tentang-kami.html" class="mobile-nav-link">Tentang Kami</a>
+                <a href="produk.html" class="mobile-nav-link">Produk</a>
+                <a href="artikel.html" class="mobile-nav-link">Artikel</a>
+                <a href="resep.html" class="mobile-nav-link">Resep</a>
+                <a href="faq.html" class="mobile-nav-link">FAQ</a>
+                <a href="kontak.html" class="mobile-nav-link">Kontak Kami</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Rasa Istimewa untuk Keluarga Indonesia</h1>
+                    <p>Selera Prima Food menghadirkan makanan beku berkualitas tinggi — nugget, sosis, saikoro, dan olahan daging pilihan untuk setiap momen keluarga Anda.</p>
+                    <div class="hero-btns">
+                        <a href="produk.html" class="btn btn-white">Lihat Produk Kami ➔</a>
+                        <a href="kontak.html" class="btn btn-outline">Hubungi Kami</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="container" style="position: static; transform: translateX(150px);">
+                <div class="stats-grid">
+                    <div class="stat-card fade-up">
+                        <span class="stat-value">30+</span>
+                        <span class="stat-label">Produk</span>
+                    </div>
+                    <div class="stat-card fade-up">
+                        <span class="stat-value">150+</span>
+                        <span class="stat-label">Klien</span>
+                    </div>
+                    <div class="stat-card fade-up">
+                        <span class="stat-value">10+</span>
+                        <span class="stat-label">Ton/Bulan</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <h2>Produk Kami</h2>
+                    <p>Pilihan produk makanan beku terbaik yang diproduksi dengan standar kualitas tinggi</p>
+                </div>
+                <div class="product-grid" id="product-list">
+                    </div>
+            </div>
+        </section>
+
+        <section class="section-padding why-us">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <h2>Mengapa Selera Prima Food?</h2>
+                    <p>Komitmen kami terhadap kualitas dan kepuasan pelanggan</p>
+                </div>
+                <div class="why-grid">
+                    <div class="why-card fade-up">
+                        <div class="why-icon">🛡️</div>
+                        <h3>Bersertifikat Halal</h3>
+                        <p>Semua produk telah tersertifikasi halal MUI</p>
+                    </div>
+                    <div class="why-card fade-up">
+                        <div class="why-icon">🏆</div>
+                        <h3>Kualitas Terjamin</h3>
+                        <p>Standar produksi BPOM & ISO terpenuhi</p>
+                    </div>
+                    <div class="why-card fade-up">
+                        <div class="why-icon">🌿</div>
+                        <h3>Bahan Segar</h3>
+                        <p>Menggunakan bahan baku pilihan terbaik</p>
+                    </div>
+                    <div class="why-card fade-up">
+                        <div class="why-icon">🚚</div>
+                        <h3>Distribusi Luas</h3>
+                        <p>Jaringan distribusi ke seluruh Indonesia</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container">
+                <div class="fade-up">
+                    <h2>Tertarik Bermitra dengan Kami?</h2>
+                    <p>Hubungi kami untuk informasi kerjasama, distribusi, dan pemesanan produk</p>
+                    <a href="kontak.html" class="btn btn-white">Hubungi Kami Sekarang</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+
+        const products = [
+            { name: "1688", desc: "Pilihan terbaik untuk Ibu hebat", Image: "LOGO BRAND-01.png", brandId: "1688" },
+            { name: "Nagetku", desc: "Pilihan terbaik untuk Ibu hebat", Image: "LOGO BRAND-02.png", brandId: "Nagetku" },
+            { name: "Pickets", desc: "Pilihan terbaik untuk Ibu hebat", Image: "LOGO BRAND-03.png", brandId: "Pickets" },
+            { name: "7Hyori", desc: "Pilihan terbaik untuk Ibu hebat", Image: "LOGO BRAND-04.png", brandId: "7Hyori" },
+        ];
+
+        const productList = document.getElementById('product-list');
+
+        // Render Produk
+        products.forEach(p => {
+            const card = document.createElement('div');
+            card.className = 'product-card fade-up';
+            card.innerHTML = `
+                <a href="produk.html?brand=${p.brandId}" style="text-decoration: none; color: inherit;">
+                    <div class="product-img-box">
+                        <img src="${p.Image}" alt="${p.name}">
+                    </div>                 
+                </a>
+
+                <div class="product-info">
+                    <h3 class="product-name">${p.name}</h3>
+                    <p class="product-desc">${p.desc}</p>
+                </div>
+            `;
+            productList.appendChild(card);
+        });
+
+        // Simple Intersection Observer untuk Animasi Fade Up (Pengganti Framer Motion)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Navbar Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconMenu = document.getElementById('icon-menu');
+        const iconClose = document.getElementById('icon-close');
+
+        menuBtn.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('open');
+            
+            // Toggle Icons
+            iconMenu.style.display = isOpen ? 'none' : 'block';
+            iconClose.style.display = isOpen ? 'block' : 'none';
+        });
+
+        // Simulasikan aktif link pas diklik
+        const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                if(window.innerWidth < 1024) {
+                    mobileMenu.classList.remove('open');
+                    iconMenu.style.display = 'block';
+                    iconClose.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="brand-logo">
+                        <div class="footer-logo">
+                            <img src="LOGO SPF.png" alt="Logo Selera Prima Food" width="90" height="45"></div>
+                        <span class="brand-name">Selera Prima <span>Food</span></span>
+                    </div>
+                    <p class="desc">
+                        Produsen makanan beku berkualitas tinggi. Nugget, sosis, olahan daging, dan lebih banyak lagi untuk keluarga Indonesia.
+                    </p>
+                </div>
+
+                <div>
+                    <h4>Navigasi</h4>
+                    <div class="link-list">
+                        <a href="beranda.html">Beranda</a>
+                        <a href="tentang-kami.html">Tentang Kami</a>
+                        <a href="produk.html">Produk</a>
+                        <a href="artikel.html">Artikel</a>
+                        <a href="resep.html">Resep</a>
+                        <a href="faq.html">FAQ</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Kontak</h4>
+                    <div class="contact-list">
+                        <div class="contact-item">📞 +62 21 1234 5678</div>
+                        <div class="contact-item">📧 info@seleraprimafood.com</div>
+                        <div class="contact-item">📍 Jakarta, Indonesia</div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Media Sosial</h4>
+                    <div class="social-flex">
+                        <a href="https://www.instagram.com/seleraprimafood/" class="social-btn" title="instagram">in</a>
+                        <a href="https://www.tiktok.com/@selera.prima.food?_r=1&_t=ZS-92pw6FuTrbJ" class="social-btn" title="tiktok">f</a>
+                        <a href="https://youtube.com/@seleraprimafood?si=_RjDQkebhil65yr2" class="social-btn" title="youtube">yt</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                &copy; 2026 Selera Prima Food. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // Aktifkan link navbar berdasarkan halaman saat ini
+    document.addEventListener('DOMContentLoaded', () => {
+    // 1. Ambil nama file dari URL (misal: produk.html)
+    const currentPath = window.location.pathname.split("/").pop();
+    
+    // 2. Cari semua link di navbar
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+
+    navLinks.forEach(link => {
+        // Bersihin class active dulu biar gak dobel
+        link.classList.remove('active');
+        
+        const href = link.getAttribute('href');
+
+        // 3. Logika pencocokan
+        if (currentPath === href) {
+            link.classList.add('active');
+        } 
+        // Kalau di beranda (index.html atau kosong)
+        else if ((currentPath === "" || currentPath === "index.html") && href === "index.html") {
+            link.classList.add('active');
+        }
+        });
+    });
+    </script>
+    
+</body>
+</html>
