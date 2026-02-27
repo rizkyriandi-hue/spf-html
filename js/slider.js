@@ -1,19 +1,27 @@
-const slides = document.querySelectorAll(".slide");
-let index = 0;
+document.addEventListener("DOMContentLoaded", function () {
 
-function showSlide(){
-slides.forEach((slide,i)=>{
-slide.style.transform = `translateY(${100*(i-index)}%)`;
+  const slides = document.querySelectorAll(".slide");
+  let current = 0;
+
+  if (slides.length === 0) return;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove("active");
+    });
+
+    slides[index].classList.add("active");
+  }
+
+  function nextSlide() {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  }
+
+  // Start first slide
+  showSlide(current);
+
+  // Auto slide every 5 seconds
+  setInterval(nextSlide, 5000);
+
 });
-}
-
-function nextSlide(){
-index++;
-if(index >= slides.length){
-index = 0;
-}
-showSlide();
-}
-
-showSlide();
-setInterval(nextSlide,5000);

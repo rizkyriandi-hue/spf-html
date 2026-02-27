@@ -5,383 +5,199 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Selera Prima Food - Beranda</title>
 
-<style>
-:root{
---primary:#eb2525;
---secondary:#af1e1e;
---background:#ffffff;
---foreground:#2a1d0f;
---muted:#f8fafc;
---muted-foreground:#64748b;
---border:#e2e8f0;
---primary-foreground:#ffffff;
-}
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Inter',sans-serif;
-}
-
-body{
-background:var(--background);
-color:var(--foreground);
-overflow-x:hidden;
-}
-
-.container{
-max-width:1200px;
-margin:auto;
-padding:0 20px;
-}
-
-/* ===== NAVBAR ===== */
-
-.header{
-position:sticky;
-top:0;
-z-index:1000;
-background:rgba(255,255,255,.9);
-backdrop-filter:blur(10px);
-border-bottom:1px solid var(--border);
-}
-
-.nav-container{
-display:flex;
-height:70px;
-align-items:center;
-justify-content:space-between;
-}
-
-.brand span{
-font-weight:700;
-font-size:18px;
-}
-
-.desktop-nav{
-display:none;
-gap:15px;
-}
-
-@media(min-width:1024px){
-.desktop-nav{display:flex;}
-}
-
-.nav-link{
-text-decoration:none;
-padding:8px 14px;
-border-radius:8px;
-font-size:14px;
-color:var(--muted-foreground);
-transition:.3s;
-}
-
-.nav-link:hover,
-.nav-link.active{
-background:rgba(235,37,37,.1);
-color:var(--primary);
-font-weight:600;
-}
-
-/* ===== HERO ===== */
-
-.hero{
-background:url("images/KELUARGA.png") center/cover no-repeat;
-height:90vh;
-display:flex;
-align-items:center;
-position:relative;
-color:white;
-}
-
-.hero::before{
-content:"";
-position:absolute;
-inset:0;
-background:linear-gradient(to right, rgba(0,0,0,.7), rgba(0,0,0,.3));
-}
-
-.hero-content{
-position:relative;
-max-width:650px;
-animation:fadeUp 1s ease;
-}
-
-.hero h1{
-font-size:3.2rem;
-font-weight:800;
-margin-bottom:20px;
-line-height:1.2;
-}
-
-.hero p{
-font-size:1.1rem;
-margin-bottom:30px;
-line-height:1.6;
-opacity:.9;
-}
-
-.hero-btns{
-display:flex;
-gap:15px;
-flex-wrap:wrap;
-}
-
-.btn{
-padding:14px 28px;
-border-radius:10px;
-text-decoration:none;
-font-weight:600;
-transition:.3s;
-}
-
-.btn-white{
-background:white;
-color:var(--primary);
-}
-
-.btn-white:hover{
-transform:translateY(-4px);
-}
-
-.btn-outline{
-border:1px solid rgba(255,255,255,.6);
-color:white;
-}
-
-.btn-outline:hover{
-background:rgba(255,255,255,.1);
-}
-
-/* ===== STATS ===== */
-
-.stats{
-margin-top:-70px;
-position:relative;
-z-index:10;
-}
-
-.stats-grid{
-display:grid;
-gap:25px;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-}
-
-.stat-card{
-background:white;
-padding:35px;
-border-radius:16px;
-text-align:center;
-box-shadow:0 15px 40px rgba(0,0,0,.08);
-transition:.4s;
-}
-
-.stat-card:hover{
-transform:translateY(-10px);
-}
-
-.stat-value{
-font-size:2.2rem;
-font-weight:800;
-color:var(--primary);
-margin-bottom:5px;
-}
-
-.stat-label{
-font-size:14px;
-color:var(--muted-foreground);
-}
-
-/* ===== PRODUCT SECTION ===== */
-
-.section-padding{
-padding:100px 0;
-}
-
-.section-header{
-text-align:center;
-margin-bottom:60px;
-}
-
-.section-header h2{
-font-size:2.4rem;
-margin-bottom:10px;
-}
-
-.product-grid{
-display:grid;
-gap:25px;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-}
-
-.product-card{
-background:white;
-border-radius:16px;
-padding:25px;
-text-align:center;
-transition:.4s;
-box-shadow:0 10px 30px rgba(0,0,0,.05);
-}
-
-.product-card:hover{
-transform:translateY(-12px);
-box-shadow:0 25px 50px rgba(0,0,0,.1);
-}
-
-.product-card img{
-max-width:100%;
-height:150px;
-object-fit:contain;
-margin-bottom:15px;
-transition:.4s;
-}
-
-.product-card:hover img{
-transform:scale(1.1);
-}
-
-.product-card h3{
-font-size:18px;
-font-weight:600;
-}
-
-/* ===== FOOTER ===== */
-
-footer{
-background:var(--foreground);
-color:white;
-padding:70px 0 30px;
-}
-
-.footer-grid{
-display:grid;
-gap:30px;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-}
-
-.footer-grid h4{
-margin-bottom:10px;
-}
-
-.footer-bottom{
-text-align:center;
-margin-top:40px;
-opacity:.6;
-font-size:14px;
-}
-
-/* ===== ANIMATION ===== */
-
-@keyframes fadeUp{
-from{opacity:0;transform:translateY(40px);}
-to{opacity:1;transform:translateY(0);}
-}
-
-</style>
+<link rel="stylesheet" href="asset/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
+<!-- HEADER -->
 <header class="header">
-<nav class="nav-container container">
-<a href="beranda.html" class="brand">
-<img src="images/LOGO SPF.png" width="90">
-<span style="color: red;">Selera Prima Food</span>
-</a>
+  <div class="container nav-container">
 
-<div class="desktop-nav">
-<a href="beranda.html" class="nav-link active">Beranda</a>
-<a href="tentang-kami.html" class="nav-link">Tentang Kami</a>
-<a href="produk.html" class="nav-link">Produk</a>
-<a href="artikel.html" class="nav-link">Artikel</a>
-<a href="resep.html" class="nav-link">Resep</a>
-<a href="faq.html" class="nav-link">FAQ</a>
-<a href="kontak.html" class="nav-link">Kontak Kami</a>
-</div>
-</nav>
+    <a href="beranda.html" class="brand">
+      <img src="images/LOGO SPF.png" width="85">
+      <span class="brand-text">Selera Prima Food</span>
+    </a>
+
+    <nav class="desktop-nav">
+      <a href="beranda.html" class="nav-link active">Beranda</a>
+      <a href="tentang-kami.html" class="nav-link">Tentang Kami</a>
+      <a href="produk.html" class="nav-link">Produk</a>
+      <a href="artikel.html" class="nav-link">Artikel</a>
+      <a href="resep.html" class="nav-link">Resep</a>
+      <a href="faq.html" class="nav-link">FAQ</a>
+      <a href="kontak.html" class="nav-link btn-contact">Kontak</a>
+    </nav>
+
+  </div>
 </header>
 
-<section class="hero">
-<div class="container hero-content">
-<h1>Rasa Istimewa untuk Keluarga Indonesia</h1>
-<p>Selera Prima Food menghadirkan makanan beku berkualitas tinggi untuk setiap momen keluarga Anda.</p>
-<div class="hero-btns">
-<a href="produk.html" class="btn btn-white">Lihat Produk</a>
-<a href="kontak.html" class="btn btn-outline">Hubungi Kami</a>
-</div>
-</div>
+<!-- HERO -->
+<section class="hero-slider">
+
+  <div class="slide active" style="background-image:url('images/KELUARGA.png')">
+    <div class="hero-content container">
+      <h1>Rasa Istimewa untuk Keluarga Indonesia</h1>
+      <p>Makanan beku premium dengan kualitas terbaik dan standar keamanan tinggi.</p>
+      <a href="produk.html" class="hero-btn">Lihat Produk</a>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image:url('images/kantor.jpg')">
+    <div class="hero-content container">
+      <h1>Kualitas Terbaik & Terpercaya</h1>
+      <p>Diproduksi dengan standar keamanan pangan terbaik.</p>
+      <a href="produk.html" class="hero-btn">Lihat Produk</a>
+    </div>
+  </div>
+
 </section>
 
-<section class="stats">
-<div class="container">
-<div class="stats-grid">
-<div class="stat-card">
-<div class="stat-value">30+</div>
-<div class="stat-label">Produk</div>
-</div>
-<div class="stat-card">
-<div class="stat-value">150+</div>
-<div class="stat-label">Klien</div>
-</div>
-<div class="stat-card">
-<div class="stat-value">10+</div>
-<div class="stat-label">Ton/Bulan</div>
-</div>
-</div>
-</div>
+<!-- KEUNGGULAN -->
+<section class="section" style="background:white;">
+  <div class="container">
+
+    <div class="section-header">
+      <h2>Mengapa Memilih SPF?</h2>
+      <p>Kami menghadirkan kualitas, rasa, dan kepercayaan</p>
+    </div>
+
+    <div class="brand-grid">
+
+      <div class="brand-card">
+        <i class="fas fa-award fa-2x" style="color:#eb2525;margin-bottom:15px;"></i>
+        <h4>Kualitas Premium</h4>
+        <p style="font-size:14px;color:#64748b;">Diproduksi dengan bahan pilihan dan proses terbaik.</p>
+      </div>
+
+      <div class="brand-card">
+        <i class="fas fa-shield-halved fa-2x" style="color:#eb2525;margin-bottom:15px;"></i>
+        <h4>Standar Keamanan</h4>
+        <p style="font-size:14px;color:#64748b;">Mengikuti standar keamanan pangan nasional.</p>
+      </div>
+
+      <div class="brand-card">
+        <i class="fas fa-truck fa-2x" style="color:#eb2525;margin-bottom:15px;"></i>
+        <h4>Distribusi Luas</h4>
+        <p style="font-size:14px;color:#64748b;">Tersedia di berbagai kota di Indonesia.</p>
+      </div>
+
+    </div>
+  </div>
 </section>
 
-<section class="section-padding">
-<div class="container">
-<div class="section-header">
-<h2>Brand Kami</h2>
-<p>Pilihan terbaik untuk keluarga Indonesia</p>
-</div>
-<div class="product-grid" id="product-list"></div>
-</div>
+<!-- BRAND -->
+<section class="section">
+  <div class="container">
+
+    <div class="section-header">
+      <h2>Brand Kami</h2>
+      <p>Pilihan terbaik untuk keluarga Indonesia</p>
+    </div>
+
+    <div class="brand-grid">
+
+      <div class="brand-card">
+        <img src="images/LOGO BRAND-01.png">
+        <h4>1688</h4>
+      </div>
+
+      <div class="brand-card">
+        <img src="images/LOGO BRAND-02.png">
+        <h4>Nagetku</h4>
+      </div>
+
+      <div class="brand-card">
+        <img src="images/LOGO BRAND-03.png">
+        <h4>Pickets</h4>
+      </div>
+
+      <div class="brand-card">
+        <img src="images/LOGO BRAND-04.png">
+        <h4>7Hyori</h4>
+      </div>
+
+    </div>
+  </div>
 </section>
 
-<footer>
-<div class="container">
-<div class="footer-grid">
-<div>
-<img src="images/LOGO SPF.png" width="90"><br><br>
-Produsen makanan beku berkualitas tinggi.
+<!-- FOOTER -->
+<footer class="main-footer">
+  <div class="container footer-grid">
+
+    <div>
+      <div class="footer-brand">
+        <img src="images/LOGO SPF.png" class="footer-logo">
+        <h3 class="footer-title">Selera Prima Food</h3>
+      </div>
+      <p class="footer-desc">
+        Produsen makanan beku berkualitas tinggi untuk keluarga Indonesia.
+      </p>
+    </div>
+
+    <div>
+  <h4>Kontak</h4>
+  <div class="footer-links">
+
+    <a href="tel:+6282261612168" class="contact-item">
+      <i class="fas fa-phone"></i>
+      <span>+62 822 6161 2168</span>
+    </a>
+
+    <a href="mailto:info@seleraprimafood.com" class="contact-item">
+      <i class="fas fa-envelope"></i>
+      <span>info@seleraprimafood.com</span>
+    </a>
+
+    <a href="https://www.google.com/maps/search/?api=1&query=Jln+Raya+Tengsaw+No.168+Tarikolot+Citeureup+Bogor+16811"
+       target="_blank"
+       class="contact-item">
+      <i class="fas fa-location-dot"></i>
+      <span>Jln Raya Tengsaw No.168 Tarikolot Citeureup Bogor 16811</span>
+    </a>
+
+  </div>
 </div>
-<div>
-<h4>Navigasi</h4>
-Beranda<br>Tentang Kami<br>Produk<br>Artikel
-</div>
-<div>
-<h4>Kontak</h4>
-+62 21 1234 5678<br>
-info@seleraprimafood.com
-</div>
-</div>
-<div class="footer-bottom">
-© 2026 Selera Prima Food
-</div>
-</div>
+
+    <div>
+      <h4>Belanja Online</h4>
+      <div class="footer-social">
+        <a href="https://shopee.co.id/" target="_blank" class="ecommerce-icon shopee"><i class="fas fa-bag-shopping"></i></a>
+        <a href="https://www.tokopedia.com/" target="_blank" class="ecommerce-icon tokopedia"><i class="fas fa-store"></i></a>
+      </div>
+    </div>
+
+   <div>
+  <h4>Media Sosial</h4>
+  <div class="footer-social">
+
+    <a href="https://www.instagram.com/seleraprimafood/" target="_blank" class="instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+
+    <a href="https://www.tiktok.com/@selera.prima.food" target="_blank" class="tiktok">
+      <i class="fab fa-tiktok"></i>
+    </a>
+
+    <a href="https://youtube.com/@seleraprimafood" target="_blank" class="youtube">
+      <i class="fab fa-youtube"></i>
+    </a>
+
+    <a href="https://wa.me/6282261612168" target="_blank" class="whatsapp-icon">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+  </div>
+</div> 
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Selera Prima Food. All rights reserved.
+  </div>
 </footer>
 
-<script>
-const products=[
-{name:"1688",img:"images/LOGO BRAND-01.png"},
-{name:"Nagetku",img:"images/LOGO BRAND-02.png"},
-{name:"Pickets",img:"images/LOGO BRAND-03.png"},
-{name:"7Hyori",img:"images/LOGO BRAND-04.png"},
-];
-
-const list=document.getElementById("product-list");
-products.forEach(p=>{
-list.innerHTML+=`
-<div class="product-card">
-<img src="${p.img}">
-<h3>${p.name}</h3>
-</div>`;
-});
-</script>
-
+<script src="js/slider.js"></script>
 </body>
 </html>

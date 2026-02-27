@@ -1,663 +1,508 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produk Kami - Selera Prima Food</title>
-    <style>
-        :root {
-            --primary: #eb2525;
-            --secondary: #af1e1e;
-            --accent: #eff6ff;
-            --background: #ffffff;
-            --foreground: #020817;
-            --muted: #f1f5f9;
-            --muted-foreground: #64748b;
-            --border: #e2e8f0;
-            --primary-foreground: #ffffff;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Produk Kami - Selera Prima Food</title>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--background); color: var(--foreground); overflow-x: hidden; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+<style>
+:root{
+--primary:#eb2525;
+--background:#ffffff;
+--foreground:#2a1d0f;
+--muted:#f8fafc;
+--muted-foreground:#64748b;
+--border:#e2e8f0;
+}
 
-        /* Header Katalog */
-        .hero-catalog {
-            position: relative;
-            background: url("images/TAP18895.jpg") center/cover no-repeat;
-            padding: 80px 0;
-            color: var(--primary-foreground);
-            overflow: hidden;   
-        }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+body{background:var(--background);color:var(--foreground);}
+.container{max-width:1200px;margin:auto;padding:0 20px;}
 
-        /* Pattern Overlay */
-        .hero-catalog::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-color: var(--foreground);
-            opacity: 0.2;
-        }
+/* NAVBAR */
+.header{
+position:sticky;top:0;z-index:1000;
+background:rgba(255,255,255,.95);
+backdrop-filter:blur(10px);
+border-bottom:1px solid var(--border);
+}
+.nav-container{
+display:flex;height:70px;align-items:center;justify-content:space-between;
+}
+.desktop-nav{display:none;gap:15px;}
+@media(min-width:1024px){.desktop-nav{display:flex;}}
+.nav-link{
+text-decoration:none;padding:8px 14px;border-radius:8px;
+font-size:14px;color:var(--muted-foreground);transition:.3s;
+}
+.nav-link:hover,.nav-link.active{
+background:rgba(235,37,37,.1);
+color:var(--primary);font-weight:600;
+}
 
-        .hero-catalog h1 { font-size: 3rem; opacity: 100%; font-weight: 800; margin-bottom: 16px; color: rgb(255, 255, 255); text-shadow: 1px 1px 2px rgba(71,71,71,0.5);
-            text-align: left;}
-        .hero-catalog p { font-size: 1.25rem; opacity: 100%; max-width: 600px; color: rgb(255, 255, 255); text-shadow: 1px 1px 2px rgba(71,71,71,0.5);
-            text-align: left;}
-        .hero-catalog h1, .hero-catalog p {position: relative; z-index: 10; text-align: left;}
-        
-        /* Filter Tabs */
-        .filter-section { padding: 48px 0 24px; }
-        .filter-container { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
-        .filter-btn {
-            padding: 8px 18px;
-            border-radius: 9999px;
-            border: 1px solid var(--border);
-            background: white;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-        .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+/* HERO */
+.hero{
+background:url("images/TAP18895.jpg") center/cover no-repeat;
+padding:90px 0;color:white;position:relative;
+}
+.hero::before{
+content:"";position:absolute;inset:0;
+background:linear-gradient(to right,rgba(0,0,0,.7),rgba(0,0,0,.3));
+}
+.hero h1,.hero p{position:relative;z-index:2;}
+.hero h1{font-size:3rem;margin-bottom:10px;}
+.hero p{font-size:1.1rem;opacity:.9;}
 
-        .cat-dropdown {
-        padding: 8px 18px;
-        background-color: white;
-        color: var(--foreground);
-        transition: 0.3s;
-        outline: none;
-        }
+/* FILTER */
+.filter-section{padding:60px 0 30px;}
+.filter-container{
+display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px;
+align-items:center;
+}
+.filter-btn{
+padding:8px 16px;border-radius:999px;
+border:1px solid var(--border);
+background:white;cursor:pointer;font-size:13px;
+transition:.3s;
+}
+.filter-btn.active{
+background:var(--primary);color:white;border-color:var(--primary);
+}
+.search-input{
+padding:8px 14px;border-radius:999px;
+border:1px solid var(--border);
+font-size:13px;width:200px;
+}
 
-        /* Biar pas kategorinya dipilih, warnanya jadi merah kayak tombol active */
-        .cat-dropdown:not([value="Semua"]) {
-        background-color: var(--primary-foreground);
-        }
+/* GRID */
+.product-grid{
+display:grid;gap:25px;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+}
 
-        /* Product Grid */
-        .product-grid {
-            display: grid;
-            gap: 24px;
-            grid-template-columns: repeat(1, 1fr);
-        }
-        @media (min-width: 640px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (min-width: 1024px) { .product-grid { grid-template-columns: repeat(3, 1fr); } }
-        @media (min-width: 1280px) { .product-grid { grid-template-columns: repeat(4, 1fr); } }
+/* CARD */
+.card{
+background:white;border-radius:18px;overflow:hidden;
+border:1px solid var(--border);transition:.4s;
+box-shadow:0 8px 20px rgba(0,0,0,.05);
+display:flex;flex-direction:column;
+}
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 20px 40px rgba(0,0,0,.1);
+}
+.card-image{
+height:220px;display:flex;align-items:center;
+justify-content:center;background:var(--muted);padding:20px;
+}
+.card-image img{
+width:100%;height:100%;object-fit:contain;transition:.4s;
+}
+.card:hover img{transform:scale(1.05);}
+.card-body{padding:20px;}
+.badge{
+background:var(--muted);
+color:var(--muted-foreground);
+padding:4px 10px;border-radius:6px;
+font-size:11px;font-weight:700;
+display:inline-block;margin-bottom:8px;
+}
+.product-name{font-size:16px;font-weight:700;margin-bottom:6px;}
+.product-desc{
+font-size:13px;color:var(--muted-foreground);
+margin-bottom:12px;
+}
+.variant-list{display:flex;flex-wrap:wrap;gap:6px;}
+.variant-badge{
+background:rgba(235,37,37,.1);
+color:var(--primary);
+padding:4px 8px;border-radius:6px;
+font-size:11px;font-weight:600;
+}
 
-        /* Card Style */
-        .card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-        }
-        .card:hover { transform: translateY(-6px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
-        
-        .card-image {
-            height: 200px; display: flex;
-            align-items: center; justify-content: center;
-            background: var(--muted); font-size: 48px; transition: 0.3s;
-            overflow: hidden; padding: 15px;
-        }
+/* PAGINATION */
+.pagination{
+display:flex;justify-content:center;
+gap:8px;margin-top:40px;
+}
+.pagination button{
+padding:6px 12px;border-radius:6px;
+border:1px solid var(--border);
+background:white;cursor:pointer;
+}
+.pagination button.active{
+background:var(--primary);
+color:white;border-color:var(--primary);
+}
 
-        .card-image img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s ease;}
-        
-        .card:hover .card-image { font-size: 56px; transform: scale(1.1); transition: 0.3s; }
-        .card:hover .card-image img { transform: scale(1.1);}       
-        
-        .card-body { padding: 20px; flex-grow: 1; }
-        
-        .badge {
-            background: var(--muted);
-            color: var(--muted-foreground);
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            display: inline-block;
-            margin-bottom: 8px;
-        }
-        
-        .product-name { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
-        .product-desc { font-size: 13px; color: var(--muted-foreground); line-height: 1.5; margin-bottom: 12px; }
-        .product-pack { font-size: 12px; color: var(--primary); font-weight: 600; }
-
-        /* HEADER & NAVBAR */
-        .header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            width: 100%;
-            border-bottom: 1px solid var(--border);
-            background-color: var(--background); 
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-        }
-
-        .nav-container {
-            display: flex;
-            height: 64px;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            color: var(--foreground);
-        }
-
-        .logo {
-            display: flex;
-            height: 40px;
-            width: 40px;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            background-color: var(--primary);
-            color: var(--primary-foreground);
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        .brand-text { font-size: 20px; font-weight: bold; }
-        .brand-text span { color: var(--foreground); }
-
-        .desktop-nav { display: none; align-items: center; gap: 4px; }
-        @media (min-width: 1024px) { .desktop-nav { display: flex; } }
-
-        .nav-link {
-            text-decoration: none;
-            padding: 8px 12px;
-            font-size: 14px;
-            font-weight: 500;
-            border-radius: 6px;
-            color: var(--muted-foreground);
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            background-color: var(--muted);
-            color: var(--primary);
-        }
-
-        .nav-link.active, .mobile-nav-link.active {
-        background-color: var(--muted) !important;
-        color: var(--primary) !important;
-        font-weight: 700;
-        }
-
-        /* Mobile Toggle */
-        .mobile-toggle {
-            display: block;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 8px;
-            color: var(--foreground);
-        }
-        @media (min-width: 1024px) { .mobile-toggle { display: none; } }
-
-        .mobile-nav {
-            display: none;
-            border-top: 1px solid var(--border);
-            background-color: white;
-            padding: 16px;
-        }
-        .mobile-nav.open { display: block; }
-        .mobile-nav-list { display: flex; flex-direction: column; gap: 4px; }
-        .mobile-nav-link {
-            text-decoration: none;
-            padding: 10px 12px;
-            font-size: 14px;
-            font-weight: 500;
-            border-radius: 6px;
-            color: var(--muted-foreground);
-            cursor: pointer;
-        }
-        .mobile-nav-link.active { background: var(--muted); color: var(--primary); }
-
-        /* Animation */
-        .fade-in { animation: fadeIn 0.4s ease-out forwards; opacity: 0; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-       /* FOOTER */
-        footer {
-            background-color: var(--foreground);
-            color: var(--background);
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 48px;
-            padding-bottom: 24px;
-        }
-
-        .footer-grid {
-            display: grid;
-            gap: 32px;
-        }
-
-        @media (min-width: 768px) {
-            .footer-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (min-width: 1024px) {
-            .footer-grid { grid-template-columns: repeat(4, 1fr); }
-        }
-
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-            justify-content: flex-start;
-        }
-
-        .footer-logo-box {
-            height: 40px;
-            width: 40px;
-            background-color: var(--primary);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 18px;
-            color: var(--primary-foreground);
-        }
-
-        .brand-name { font-size: 18px; font-weight: bold; text-align: left; margin: 0;}
-        .brand-name span { color: var(--primary-foreground); }
-
-        .desc {
-            font-size: 14px;
-            opacity: 0.7;
-            line-height: 1.6;
-            margin: 0;
-            text-align: left;
-            max-width: 300px;
-        }
-
-        footer h4 {
-            font-size: 18px;
-            font-weight: bold;
-            margin: 0 0 16px 0;
-        }
-
-        .link-list, .contact-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            font-size: 14px;
-        }
-
-        .link-list a {
-            color: inherit;
-            text-decoration: none;
-            opacity: 0.7;
-            transition: 0.3s;
-        }
-
-        .link-list a:hover {
-            color: var(--primary);
-            opacity: 1;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            opacity: 0.7;
-        }
-
-        .social-flex {
-            display: flex;
-            gap: 12px;
-        }
-
-        .social-btn {
-            height: 40px;
-            width: 40px;
-            border-radius: 50%;
-            background-color: rgba(37, 99, 235, 0.2);
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .social-btn:hover {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .footer-bottom {
-            margin-top: 40px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 24px;
-            text-align: center;
-            font-size: 14px;
-            opacity: 0.5;
-        }
-    </style>
+/* FOOTER */
+footer{
+background:var(--foreground);
+color:white;padding:70px 0 30px;
+margin-top:80px;
+}
+.footer-grid{
+display:grid;gap:30px;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+}
+.footer-bottom{
+text-align:center;margin-top:40px;
+opacity:.6;font-size:14px;
+}
+</style>
 </head>
+
 <body>
-    <header class="header">
-        <nav class="nav-container container">
-            <a href="/" class="brand">
-                <div class=""><img src="images/LOGO SPF.png" alt="Logo Selera Prima Food" width="90" height="45"></div>
-                <span class="brand-text">Selera Prima <span>Food</span></span>
-            </a>
 
-            <div class="desktop-nav">
-                <a href="beranda.html" class="nav-link active">Beranda</a>
-                <a href="tentang-kami.html" class="nav-link">Tentang Kami</a>
-                <a href="produk.html" class="nav-link">Produk</a>
-                <a href="artikel.html" class="nav-link">Artikel</a>
-                <a href="resep.html" class="nav-link">Resep</a>
-                <a href="faq.html" class="nav-link">FAQ</a>
-                <a href="kontak.html" class="nav-link">Kontak Kami</a>
-            </div>
+<header class="header">
+<nav class="nav-container container">
+<a href="beranda.html">
+<img src="images/LOGO SPF.png" width="90">
+</a>
+<div class="desktop-nav">
+<a href="beranda.html" class="nav-link">Beranda</a>
+<a href="tentang-kami.html" class="nav-link">Tentang Kami</a>
+<a href="produk.html" class="nav-link active">Produk</a>
+<a href="artikel.html" class="nav-link">Artikel</a>
+<a href="resep.html" class="nav-link">Resep</a>
+<a href="faq.html" class="nav-link">FAQ</a>
+<a href="kontak.html" class="nav-link">Kontak</a>
+</div>
+</nav>
+</header>
 
-            <button class="mobile-toggle" id="menu-btn">
-                <svg id="icon-menu" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                <svg id="icon-close" style="display:none" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-        </nav>
+<section class="hero">
+<div class="container">
+<h1>Produk Kami</h1>
+<p>Temukan berbagai pilihan makanan beku berkualitas untuk keluarga Indonesia</p>
+</div>
+</section>
 
-        <div class="mobile-nav" id="mobile-menu">
-            <div class="mobile-nav-list">
-                <a href="beranda.html" class="mobile-nav-link active">Beranda</a>
-                <a href="tentang-kami.html" class="mobile-nav-link">Tentang Kami</a>
-                <a href="produk.html" class="mobile-nav-link">Produk</a>
-                <a href="artikel.html" class="mobile-nav-link">Artikel</a>
-                <a href="resep.html" class="mobile-nav-link">Resep</a>
-                <a href="faq.html" class="mobile-nav-link">FAQ</a>
-                <a href="kontak.html" class="mobile-nav-link">Kontak Kami</a>
-            </div>
-        </div>
-    </header>
+<section class="filter-section">
+<div class="container">
 
-    <main>
-        <section class="hero-catalog">
-            <div class="container">
-                <h1>Produk Kami</h1>
-                <p>Temukan berbagai pilihan makanan beku berkualitas untuk kebutuhan Anda</p>
-            </div>
-        </section>
+<div class="filter-container">
+<button class="filter-btn brand-btn active" onclick="filterByBrand('Semua',this)">Semua</button>
+<button class="filter-btn brand-btn" onclick="filterByBrand('1688',this)">1688</button>
+<button class="filter-btn brand-btn" onclick="filterByBrand('Nagetku',this)">Nagetku</button>
+<button class="filter-btn brand-btn" onclick="filterByBrand('Pickets',this)">Pickets</button>
+<button class="filter-btn brand-btn" onclick="filterByBrand('7Hyori',this)">7Hyori</button>
 
-        <section class="filter-section">
-            <div class="container">
-                <div class="filter-container" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; align-items: center;">
-                    <button class="filter-btn brand-btn active" onclick="filterByBrand('Semua', this)">Semua</button>
-                    <button class="filter-btn brand-btn" onclick="filterByBrand('1688', this)">1688</button>
-                    <button class="filter-btn brand-btn" onclick="filterByBrand('Nagetku', this)">Nagetku</button>
-                    <button class="filter-btn brand-btn" onclick="filterByBrand('Pickets', this)">Pickets</button>
-                    <button class="filter-btn brand-btn" onclick="filterByBrand('7Hyori', this)">7Hyori</button>
+<select class="filter-btn" onchange="filterByCategory(this.value)">
+<option value="Semua">Semua Kategori</option>
+<option value="Sosis">Sosis</option>
+<option value="Daging">Daging</option>
+<option value="Nugget">Nugget</option>
+<option value="Lain-lain">Lain-lain</option>
+</select>
 
-                    <select class="filter-btn cat-dropdown" onchange="filterByCategory(this.value)" style="width: 170px; height: auto; cursor: pointer; appearance: auto;">
-                        <option value="Semua">Semua Kategori</option>
-                        <option value="Nugget">Nugget</option>
-                        <option value="Sosis">Sosis</option>
-                        <option value="Olahan Daging">Olahan Daging</option>
-                        <option value="Kornet">Kornet</option>
-                        <option value="Burger">Burger</option>
-                    </select>
-                    
-                </div>
-                
-                <div class="product-grid" id="product-grid">
-                    </div>
-            </div>
+<input type="text" class="search-input" placeholder="Cari produk..." onkeyup="searchProduct(this.value)">
+</div>
 
-            <div id="pagination-container" style="display: flex; justify-content: center; gap: 10px; margin-top: 40px;">
-                </div>
-        </section>
-    </main>
+<div class="product-grid" id="product-grid"></div>
+<div class="pagination" id="pagination"></div>
 
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <div class="brand-logo">
-                        <div class="footer-logo">
-                            <img src="images/LOGO SPF.png" alt="Logo Selera Prima Food" width="90" height="45"></div>
-                        <span class="brand-name">Selera Prima <span>Food</span></span>
-                    </div>
-                    <p class="desc">
-                        Produsen makanan beku berkualitas tinggi. Nugget, sosis, olahan daging, dan lebih banyak lagi untuk keluarga Indonesia.
-                    </p>
-                </div>
+</div>
+</section>
 
-                <div>
-                    <h4>Navigasi</h4>
-                    <div class="link-list">
-                        <a href="beranda.html">Beranda</a>
-                        <a href="tentang-kami.html">Tentang Kami</a>
-                        <a href="produk.html">Produk</a>
-                        <a href="artikel.html">Artikel</a>
-                        <a href="resep.html">Resep</a>
-                        <a href="faq.html">FAQ</a>
-                    </div>
-                </div>
+<footer>
+<div class="container">
+<div class="footer-grid">
+<div>
+<img src="images/LOGO SPF.png" width="90"><br><br>
+<p style="opacity:.7;font-size:14px;line-height:1.6;">
+Produsen makanan beku berkualitas tinggi untuk keluarga Indonesia.
+</p>
+</div>
 
-                <div>
-                    <h4>Kontak</h4>
-                    <div class="contact-list">
-                        <div class="contact-item"><span>📞</span> +62 21 1234 5678</div>
-                        <div class="contact-item"><span>📧</span> info@seleraprimafood.com</div>
-                        <div class="contact-item"><span>📍</span> Jl. Tengsaw No.168, Tarikolot, Kec. Citeureup, Kabupaten Bogor, Jawa Barat 16811</div>
-                    </div>
-                </div>
+<div>
+<h4>Brand</h4>
+<div style="opacity:.7;font-size:14px;line-height:1.8;">
+1688<br>Nagetku<br>Pickets<br>7Hyori
+</div>
+</div>
 
-                <div>
-                    <h4>Media Sosial</h4>
-                    <div class="social-flex">
-                        <a href="https://www.instagram.com/seleraprimafood/" class="social-btn" title="instagram">in</a>
-                        <a href="https://www.tiktok.com/@selera.prima.food?_r=1&_t=ZS-92pw6FuTrbJ" class="social-btn" title="tiktok">f</a>
-                        <a href="https://youtube.com/@seleraprimafood?si=_RjDQkebhil65yr2" class="social-btn" title="youtube">yt</a>
-                    </div>
-                </div>
-            </div>
+<div>
+<h4>Kategori</h4>
+<div style="opacity:.7;font-size:14px;line-height:1.8;">
+Sosis<br>Daging<br>Nugget<br>Lain-lain
+</div>
+</div>
 
-            <div class="footer-bottom">
-                &copy; 2026 Selera Prima Food. All rights reserved.
-            </div>
-        </div>
-    </footer>
+<div>
+<h4>Kontak</h4>
+<div style="opacity:.7;font-size:14px;line-height:1.8;">
++62 21 1234 5678<br>
+info@seleraprimafood.com
+</div>
+</div>
+</div>
 
-    <script>
-// 1. DATA PRODUK (Tetap sama)
-    const allProducts = [
-        { name: "Naget Ayam", brand: "1688", category: "Nugget", desc: "Nugget ayam dengan bumbu original", pack: "250g / 500g / 1kg", Image: "images/NAGET 1688.png" },
-        { name: "Naget Ayam Stik", brand: "1688", category: "Nugget", desc: "Nugget ayam stik dengan bumbu original", pack: "250g / 500g / 1kg", Image: "images/STIK1688.png" },
-        { name: "Sosis Sapi", brand: "1688", category: "Sosis", desc: "Sosis sapi lembut untuk keluarga", pack: "375g / 1kg", Image: "images/SOSISSAPI1688.png" },
-        { name: "Sosis Ayam", brand: "1688", category: "Sosis", desc: "Sosis ayam lembut untuk keluarga", pack: "375g / 1kg", Image: "images/SOSISAYAM1688.png" },
-        { name: "Sosis Bakar", brand: "1688", category: "Sosis", desc: "Sosis bakar lembut untuk keluarga", pack: "500g: 7pcs / 12pcs", Image: "images/SOSISBAKAR1688.png" },
-        { name: "Beef Rounded", brand:"1688", category:"Olahan Daging", desc:"Potongan daging sapi grade A bentuk rounded", pack:"500g", Image:"images/ROUNDED1688.png"},
-        { name: "Beef Saikoro", brand:"1688", category:"Olahan Daging", desc:"Potongan daging sapi saikoro grade A", pack:"500g", Image:"images/BEEFSAIKORO1688.png"},
-        { name: "Kornet Koin Ayam", brand:"1688", category:"Kornet", desc:"Kornet ayam dengan bentuk koin", pack:"450g", Image:"images/KOIN1688.png"},
-        { name: "Kornet Ayam", brand:"1688", category:"Kornet", desc:"Kornet ayam dengan rasa autentik", pack:"450g", Image:"images/KORNET1688.png"},
-        { name: "Burger Sapi", brand:"1688", category:"Burger", desc:"Patty burger daging sapi", pack:"250g / 280g", Image:"images/BURGERSAPI1688.png"},
-        { name: "Naget Ayam", brand: "Nagetku", category: "Nugget", desc: "Nugget ayam dengan bumbu original", pack: "250g / 500g / 1kg", Image: "images/NAGETKU.png" },
-        { name: "Naget Ayam Stik", brand: "Nagetku", category: "Nugget", desc: "Nugget ayam dengan bumbu original", pack: "250g / 500g / 1kg", Image: "images/NAGETKUSTIK.png" },
-        { name: "Naget Ayam", brand: "Pickets", category: "Nugget", desc: "Nugget ayam stik dengan bumbu original", pack: "250g / 500g / 1kg", Image: "images/PICKETSNAGET.png" },
-        { name: "Naget Ayam Renyah", brand: "Pickets", category: "Nugget", desc: "Irisan daging untuk sukiyaki premium ", pack: "250g / 500g ", Image: "images/PICKETSNAGETRENYAH.png" },
-        { name: "Naget Ayam Stik", brand : "Pickets", category : "Nugget", desc : "Irisan daging tipis untuk shabu-shabu ", pack : "250g / 500g ", Image : "images/PICKETSNAGETSTIK.png" },
-        { name: "Sosis Sapi", brand : "Pickets", category : "Sosis", desc : "Irisan daging tipis untuk shabu-shabu ", pack : "250g / 500g ", Image :"images/PICKETSSOSISSAPI.png" },
-        { name: "Sosis Ayam", brand: "Pickets", category: "Sosis", desc: "Potongan daging sapi saikoro grade A", pack: "500g", Image: "images/PICKETSSOSISAYAM.png" },
-        { name: "Sosis Sapi Cocktail", brand: "Pickets", category: "Sosis", desc: "Daging cincang sapi serbaguna", pack: "500g", Image: "images/PICKETSSOSISSAPICOCKTAIL.png" },
-        { name: "Sosis Frankfurter", brand: "Pickets", category: "Sosis", desc: "Daging giling sapi segar", pack: "500g", Image: "images/PICKETSSOSISFRANKFURTER.png" },
-        { name: "Naget Ayam Renyah", brand: "7Hyori", category: "Nugget", desc: "Daging cincang sapi serbaguna", pack: "500g", Image: "images/NAGET7HYORI.png" },
-        { name: "Naget Ayam Stik", brand: "7Hyori", category: "Nugget", desc: "Daging cincang sapi serbaguna", pack: "500g", Image: "images/NAGET7HYORISTIK.png" },
-    ];
+<div class="footer-bottom">
+© 2026 Selera Prima Food. All rights reserved.
+</div>
+</div>
+</footer>
 
-    // 2. VARIABEL GLOBAL & STATE
-    let selectedBrand = 'Semua';
-    let selectedCategory = 'Semua';
-    let currentPage = 1;
-    const productsPerPage = 8;
-    let currentFilteredData = allProducts;
+<script>
 
-    // 3. FUNGSI FILTER UTAMA
-    function filterByBrand(brand, btn) {
-        // Update styling tombol
-        document.querySelectorAll('.brand-btn').forEach(b => b.classList.remove('active'));
-        if(btn) btn.classList.add('active'); // Tambah pengecekan if(btn)
-        
-        selectedBrand = brand;
-        applyDoubleFilter();
-    }
+const allProducts = [
+/* ---- PASTE SEMUA 21 PRODUK LO DI SINI (format variants sudah benar) ---- */
+{
+name:"Naget Ayam",
+brand:"1688",
+category:"Nugget",
+desc:"Nugget ayam dengan bumbu original",
+Image:"images/NAGET 1688.png",
+variants:["250g","500g","1kg"]
+},
+{
+name:"Naget ayam Stik",
+brand:"1688",
+category:"Nugget",
+desc:"Nugget ayam stik dengan bumbu original",
+Image:"images/STIK1688.png",
+variants:["250g","500g","1kg"]
+},
+{
+name:"Sosis Sapi",
+brand:"1688",
+category:"Sosis",
+desc:"Sosis sapi lembut untuk keluarga",
+Image:"images/SOSISSAPI1688.png",
+variants:["375g","1kg"]
+},
+{
+name:"Sosis Ayam",
+brand:"1688",
+category:"Sosis",
+desc:"Sosis ayam lembut untuk keluarga",
 
-    function filterByCategory(cat) {
-        selectedCategory = cat;
-        applyDoubleFilter();
-    }
+Image:"images/SOSISAYAM1688.png",
+variants:["375g","1kg"]
+},
+{
+name:"Sosis Bakar",
+brand:"1688",
+category:"Sosis",
+desc:"Sosis bakar lembut untuk keluarga",
+Image:"images/SOSISBAKAR1688.png",
+variants:["500g:7pcs","500g : 12pcs"]
+},
+{
+name:"Beef Rounded",
+brand:"1688",
+category:"Daging",
+desc:"Potongan Daging Sapi grade A bentuk rounded",
+Image:"images/ROUNDED1688.png",
+variants:["500g"]
+},
+{
+name:"Beef Saikoro",
+brand:"1688",
+category:"Daging",
+desc:"Potongan Daging Sapi Saikoro Grade A",
+Image:"images/BEEFSAIKORO1688.png",
+variants:["500g"]
+},
+{
+name:"Kornet Koin Ayam",
+brand:"1688",
+category:"Lain-lain",
+desc:"Kornet Ayam dengan bentuk koin",
+Image:"images/KOIN1688.png",
+variants:["450g"]
+},
+{
+name:"Kornet Ayam",
+brand:"1688",
+category:"Lain-lain",
+desc:"Kornet ayam dengan rasa autentik",
+Image:"images/KORNET1688.png",
+variants:["450g"]
+},
+{
+name:"Burger Sapi",
+brand:"1688",
+category:"Lain-lain",
+desc:"Patty Burger Daging Sapi",
+Image:"images/BURGERSAPI1688.png",
+variants:["250g","280"]
+},
+{
+name:"Naget Ayam",
+brand:"Nagetku",
+category:"Nugget",
+desc:"Nugget ayam berkualitas premium",
+Image:"images/NAGETKU.png",
+variants:["250g","500g","1kg"]
+},
+{
+name:"Naget Ayam Stik",
+brand:"Nagetku",
+category:"Nugget",
+desc:"Nugget Ayam dengan bumbu original",
+Image:"images/NAGETKUSTIK.png",
+variants:["250g","500g","1kg"]
+},
+{
+name:"Naget Ayam",
+brand:"Pickets",
+category:"Nugget",
+desc:"Nugget Ayam dengan bumbu original ",
+Image:"images/PICKETSNAGET.png",
+variants:["250g","500g","1kg"]
+},
+{
+name:"Naget Ayam Renyah",
+brand:"Pickets",
+category:"Nugget",
+desc:"Nugget Renyah",
+Image:"images/PICKETSNAGETRENYAH.png",
+variants:["250g","500g"]
+},
+{
+name:"Naget Ayam Stik",
+brand:"Pickets",
+category:"Nugget",
+desc:"Nugget Ayam stik dengan bumbu original",
+Image:"images/PICKETSNAGETSTIK.png",
+variants:["250g","500g"]
+},
+{
+name:"Sosis Sapi",
+brand:"Pickets",
+category:"Sosis",
+desc:"Sosis Sapi Premium",
+Image:"images/PICKETSSOSISSAPI.png",
+variants:["250g","500g"]
+},
+{
+name:"Sosis Ayam",
+brand:"Pickets",
+category:"Sosis",
+desc:"Sosis Ayam Premium",
+Image:"images/PICKETSSOSISAYAM.png",
+variants:["500g"]
+},
+{
+name:"Sosis Sapi Cocktail",
+brand:"Pickets",
+category:"Sosis",
+desc:"Sosis Sapi Cocktail",
+Image:"images/PICKETSSOSISSAPICOCKTAIL.png",
+variants:["500g"]
+},
+{
+name:"Sosis Frankfurter",
+brand:"Pickets",
+category:"Sosis",
+desc:"Sosis Premium Frankfurter",
+Image:"images/PICKETSSOSISFRANKFURTER.png",
+variants:["500g"]
+},
+{
+name:"Naget Ayam Renyah",
+brand:"7Hyori",
+category:"Nugget",
+desc:"Tekstur renyah dan gurih",
+Image:"images/NAGET7HYORI.png",
+variants:["500g"]
+},
+{
+name:"Naget Ayam Stik",
+brand:"7Hyori",
+category:"Nugget",
+desc:"Naget Stik Super Premium",
+Image:"images/NAGET7HYORISTIK.png",
+variants:["500g"]
+}
+];
 
-    function applyDoubleFilter() {
-        currentPage = 1; 
-        currentFilteredData = allProducts.filter(p => {
-            const matchBrand = (selectedBrand === 'Semua' || p.brand === selectedBrand);
-            const matchCategory = (selectedCategory === 'Semua' || p.category === selectedCategory);
-            return matchBrand && matchCategory;
-        });
-        renderProducts(currentFilteredData);
-    }
+let selectedBrand='Semua';
+let selectedCategory='Semua';
+let searchKeyword='';
+let currentPage=1;
+const perPage=8;
+let filteredData=[];
 
-    // 4. FUNGSI RENDER KE LAYAR
-    function renderProducts(data) {
-        const grid = document.getElementById('product-grid');
-        const paginationContainer = document.getElementById('pagination-container');
-        grid.innerHTML = '';
-        paginationContainer.innerHTML = '';
+function filterByBrand(brand,btn){
+document.querySelectorAll('.brand-btn').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+selectedBrand=brand;
+applyFilter();
+}
 
-        const startIndex = (currentPage - 1) * productsPerPage;
-        const endIndex = startIndex + productsPerPage;
-        const paginatedData = data.slice(startIndex, endIndex);
+function filterByCategory(cat){
+selectedCategory=cat;
+applyFilter();
+}
 
-        paginatedData.forEach((product, index) => {
-            const card = document.createElement('div');
-            card.className = 'card fade-in';
-            card.style.animationDelay = `${index * 0.05}s`;
-            card.innerHTML = `
-                <div class="card-image"><img src="${product.Image}" alt="${product.name}"></div>
-                <div class="card-body">
-                    <span class="badge">${product.category}</span>
-                    <h3 class="product-name">${product.name}</h3>
-                    <p class="product-desc">${product.desc}</p>
-                    <p class="product-pack">📦 ${product.pack}</p>
-                </div>
-            `;
-            grid.appendChild(card);
-        });
+function searchProduct(keyword){
+searchKeyword=keyword.toLowerCase();
+applyFilter();
+}
 
-        // Pagination
-        const totalPages = Math.ceil(data.length / productsPerPage);
-        if (totalPages > 1) {
-            for (let i = 1; i <= totalPages; i++) {
-                const btn = document.createElement('button');
-                btn.innerText = i;
-                btn.className = `filter-btn ${i === currentPage ? 'active' : ''}`;
-                btn.onclick = () => {
-                    currentPage = i;
-                    renderProducts(data);
-                    window.scrollTo({ top: 400, behavior: 'smooth' });
-                };
-                paginationContainer.appendChild(btn);
-            }
-        }
-    }
+function applyFilter(){
+currentPage=1;
+filteredData=allProducts.filter(p=>{
+const matchBrand = selectedBrand==='Semua'||p.brand===selectedBrand;
+const matchCategory = selectedCategory==='Semua'||p.category===selectedCategory;
+const matchSearch = p.name.toLowerCase().includes(searchKeyword);
+return matchBrand && matchCategory && matchSearch;
+});
+renderProducts();
+}
 
-    // 5. DETEKTIF URL (Ganti blok ini di produk.html lo)
-    document.addEventListener('DOMContentLoaded', () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const brandFromUrl = urlParams.get('brand');
+function renderProducts(){
+const grid=document.getElementById('product-grid');
+const pagination=document.getElementById('pagination');
+grid.innerHTML='';
+pagination.innerHTML='';
 
-        if (brandFromUrl && brandFromUrl !== 'undefined') {
-            // Cari semua tombol brand
-            const allBrandBtns = document.querySelectorAll('.brand-btn');
-            
-            // Cari tombol yang teksnya pas (misal: "Nagetku")
-            let targetBtn = Array.from(allBrandBtns).find(btn => 
-                btn.innerText.trim().toLowerCase() === brandFromUrl.toLowerCase()
-            );
-            
-            if (targetBtn) {
-                // Jalankan filter pake brand dan tombol yang ketemu
-                filterByBrand(brandFromUrl, targetBtn);
-            } else {
-                renderProducts(allProducts);
-            }
-        } else {
-            renderProducts(allProducts);
-        }
-    });
-    
-        // Navbar Mobile Menu Toggle
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const iconMenu = document.getElementById('icon-menu');
-        const iconClose = document.getElementById('icon-close');
+const start=(currentPage-1)*perPage;
+const end=start+perPage;
+const pageData=filteredData.slice(start,end);
 
-        menuBtn.addEventListener('click', () => {
-            const isOpen = mobileMenu.classList.toggle('open');
-            
-            // Toggle Icons
-            iconMenu.style.display = isOpen ? 'none' : 'block';
-            iconClose.style.display = isOpen ? 'block' : 'none';
-        });
+pageData.forEach(product=>{
+const card=document.createElement('div');
+card.className='card';
+card.innerHTML=`
+<div class="card-image">
+<img src="${product.Image}" loading="lazy" alt="${product.name}">
+</div>
+<div class="card-body">
+<span class="badge">${product.category}</span>
+<h3 class="product-name">${product.name}</h3>
+<p class="product-desc">${product.desc}</p>
+<div class="variant-list">
+${product.variants.map(v=>`<span class="variant-badge">📦 ${v}</span>`).join('')}
+</div>
+</div>
+`;
+grid.appendChild(card);
+});
 
-        // Simulasikan aktif link pas diklik
-        const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                navLinks.forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-                if(window.innerWidth < 1024) {
-                    mobileMenu.classList.remove('open');
-                    iconMenu.style.display = 'block';
-                    iconClose.style.display = 'none';
-                }
-            });
-        });
-    </script>
+const totalPages=Math.ceil(filteredData.length/perPage);
+if(totalPages>1){
+for(let i=1;i<=totalPages;i++){
+const btn=document.createElement('button');
+btn.innerText=i;
+btn.className=i===currentPage?'active':'';
+btn.onclick=()=>{
+currentPage=i;
+renderProducts();
+window.scrollTo({top:300,behavior:'smooth'});
+};
+pagination.appendChild(btn);
+}
+}
+}
 
-    <script>
-    // Aktifkan link navbar berdasarkan halaman saat ini
-    document.addEventListener('DOMContentLoaded', () => {
-    // 1. Ambil nama file dari URL (misal: produk.html)
-    const currentPath = window.location.pathname.split("/").pop();
-    
-    // 2. Cari semua link di navbar
-    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+filteredData=allProducts;
+renderProducts();
 
-    navLinks.forEach(link => {
-        // Bersihin class active dulu biar gak dobel
-        link.classList.remove('active');
-        
-        const href = link.getAttribute('href');
-
-        // 3. Logika pencocokan
-        if (currentPath === href) {
-            link.classList.add('active');
-        } 
-        // Kalau di beranda (index.html atau kosong)
-        else if ((currentPath === "" || currentPath === "index.html") && href === "index.html") {
-            link.classList.add('active');
-        }
-        });
-    });
-    </script>
+</script>
 
 </body>
 </html>
