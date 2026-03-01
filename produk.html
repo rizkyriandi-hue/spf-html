@@ -5,247 +5,173 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Produk Kami - Selera Prima Food</title>
 
-<style>
-:root{
---primary:#eb2525;
---background:#ffffff;
---foreground:#2a1d0f;
---muted:#f8fafc;
---muted-foreground:#64748b;
---border:#e2e8f0;
-}
-
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
-body{background:var(--background);color:var(--foreground);}
-.container{max-width:1200px;margin:auto;padding:0 20px;}
-
-/* NAVBAR */
-.header{
-position:sticky;top:0;z-index:1000;
-background:rgba(255,255,255,.95);
-backdrop-filter:blur(10px);
-border-bottom:1px solid var(--border);
-}
-.nav-container{
-display:flex;height:70px;align-items:center;justify-content:space-between;
-}
-.desktop-nav{display:none;gap:15px;}
-@media(min-width:1024px){.desktop-nav{display:flex;}}
-.nav-link{
-text-decoration:none;padding:8px 14px;border-radius:8px;
-font-size:14px;color:var(--muted-foreground);transition:.3s;
-}
-.nav-link:hover,.nav-link.active{
-background:rgba(235,37,37,.1);
-color:var(--primary);font-weight:600;
-}
-
-/* HERO */
-.hero{
-background:url("images/TAP18895.jpg") center/cover no-repeat;
-padding:90px 0;color:white;position:relative;
-}
-.hero::before{
-content:"";position:absolute;inset:0;
-background:linear-gradient(to right,rgba(0,0,0,.7),rgba(0,0,0,.3));
-}
-.hero h1,.hero p{position:relative;z-index:2;}
-.hero h1{font-size:3rem;margin-bottom:10px;}
-.hero p{font-size:1.1rem;opacity:.9;}
-
-/* FILTER */
-.filter-section{padding:60px 0 30px;}
-.filter-container{
-display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px;
-align-items:center;
-}
-.filter-btn{
-padding:8px 16px;border-radius:999px;
-border:1px solid var(--border);
-background:white;cursor:pointer;font-size:13px;
-transition:.3s;
-}
-.filter-btn.active{
-background:var(--primary);color:white;border-color:var(--primary);
-}
-.search-input{
-padding:8px 14px;border-radius:999px;
-border:1px solid var(--border);
-font-size:13px;width:200px;
-}
-
-/* GRID */
-.product-grid{
-display:grid;gap:25px;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-}
-
-/* CARD */
-.card{
-background:white;border-radius:18px;overflow:hidden;
-border:1px solid var(--border);transition:.4s;
-box-shadow:0 8px 20px rgba(0,0,0,.05);
-display:flex;flex-direction:column;
-}
-.card:hover{
-transform:translateY(-8px);
-box-shadow:0 20px 40px rgba(0,0,0,.1);
-}
-.card-image{
-height:220px;display:flex;align-items:center;
-justify-content:center;background:var(--muted);padding:20px;
-}
-.card-image img{
-width:100%;height:100%;object-fit:contain;transition:.4s;
-}
-.card:hover img{transform:scale(1.05);}
-.card-body{padding:20px;}
-.badge{
-background:var(--muted);
-color:var(--muted-foreground);
-padding:4px 10px;border-radius:6px;
-font-size:11px;font-weight:700;
-display:inline-block;margin-bottom:8px;
-}
-.product-name{font-size:16px;font-weight:700;margin-bottom:6px;}
-.product-desc{
-font-size:13px;color:var(--muted-foreground);
-margin-bottom:12px;
-}
-.variant-list{display:flex;flex-wrap:wrap;gap:6px;}
-.variant-badge{
-background:rgba(235,37,37,.1);
-color:var(--primary);
-padding:4px 8px;border-radius:6px;
-font-size:11px;font-weight:600;
-}
-
-/* PAGINATION */
-.pagination{
-display:flex;justify-content:center;
-gap:8px;margin-top:40px;
-}
-.pagination button{
-padding:6px 12px;border-radius:6px;
-border:1px solid var(--border);
-background:white;cursor:pointer;
-}
-.pagination button.active{
-background:var(--primary);
-color:white;border-color:var(--primary);
-}
-
-/* FOOTER */
-footer{
-background:var(--foreground);
-color:white;padding:70px 0 30px;
-margin-top:80px;
-}
-.footer-grid{
-display:grid;gap:30px;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-}
-.footer-bottom{
-text-align:center;margin-top:40px;
-opacity:.6;font-size:14px;
-}
-</style>
+<link rel="stylesheet" href="asset/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
+<!-- HEADER -->
 <header class="header">
-<nav class="nav-container container">
-<a href="beranda.html">
-<img src="images/LOGO SPF.png" width="90">
-</a>
-<div class="desktop-nav">
-<a href="beranda.html" class="nav-link">Beranda</a>
-<a href="tentang-kami.html" class="nav-link">Tentang Kami</a>
-<a href="produk.html" class="nav-link active">Produk</a>
-<a href="artikel.html" class="nav-link">Artikel</a>
-<a href="resep.html" class="nav-link">Resep</a>
-<a href="faq.html" class="nav-link">FAQ</a>
-<a href="kontak.html" class="nav-link">Kontak</a>
-</div>
-</nav>
+  <div class="container nav-container">
+
+    <a href="beranda.html" class="brand">
+      <img src="images/LOGO SPF.png" width="85">
+      <span class="brand-text">Selera Prima Food</span>
+    </a>
+
+    <nav class="desktop-nav">
+      <a href="beranda.html" class="nav-link">Beranda</a>
+      <a href="tentang-kami.html" class="nav-link">Tentang Kami</a>
+      <a href="produk.html" class="nav-link active">Produk</a>
+      <a href="artikel.html" class="nav-link">Artikel</a>
+      <a href="resep.html" class="nav-link">Resep</a>
+      <a href="faq.html" class="nav-link">FAQ</a>
+      <a href="kontak.html" class="nav-link btn-contact">Kontak</a>
+    </nav>
+
+  </div>
 </header>
 
-<section class="hero">
-<div class="container">
-<h1>Produk Kami</h1>
-<p>Temukan berbagai pilihan makanan beku berkualitas untuk keluarga Indonesia</p>
+<!-- HERO -->
+<section class="hero-slider product-slider">
+
+  <div class="slide active" style="background-image:url('images/TAP18895.jpg')">
+    <div class="hero-content container">
+      <h1>Produk Kami</h1>
+      <p>Temukan berbagai pilihan makanan beku berkualitas untuk keluarga Indonesia</p>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image:url('images/1.png')">
+    <div class="hero-content container">
+      <h1>Kualitas Terbaik</h1>
+      <p>Diproduksi dengan standar keamanan pangan tinggi</p>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image:url('images/madu.jpg')">
+    <div class="hero-content container">
+      <h1>Brand Terpercaya</h1>
+      <p>1688 • Nagetku • Pickets • 7Hyori</p>
+    </div>
+  </div>
+<div class="slider-dots">
+  <span class="dot active"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
 </div>
 </section>
 
-<section class="filter-section">
-<div class="container">
+<!-- FILTER & PRODUCT -->
+<section class="section" style="background:#f8fafc;">
+  <div class="container">
 
-<div class="filter-container">
-<button class="filter-btn brand-btn active" onclick="filterByBrand('Semua',this)">Semua</button>
-<button class="filter-btn brand-btn" onclick="filterByBrand('1688',this)">1688</button>
-<button class="filter-btn brand-btn" onclick="filterByBrand('Nagetku',this)">Nagetku</button>
-<button class="filter-btn brand-btn" onclick="filterByBrand('Pickets',this)">Pickets</button>
-<button class="filter-btn brand-btn" onclick="filterByBrand('7Hyori',this)">7Hyori</button>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px;align-items:center;">
 
-<select class="filter-btn" onchange="filterByCategory(this.value)">
-<option value="Semua">Semua Kategori</option>
-<option value="Sosis">Sosis</option>
-<option value="Daging">Daging</option>
-<option value="Nugget">Nugget</option>
-<option value="Lain-lain">Lain-lain</option>
-</select>
+      <button class="filter-btn brand-btn active" onclick="filterByBrand('Semua',this)">Semua</button>
+      <button class="filter-btn brand-btn" onclick="filterByBrand('1688',this)">1688</button>
+      <button class="filter-btn brand-btn" onclick="filterByBrand('Nagetku',this)">Nagetku</button>
+      <button class="filter-btn brand-btn" onclick="filterByBrand('Pickets',this)">Pickets</button>
+      <button class="filter-btn brand-btn" onclick="filterByBrand('7Hyori',this)">7Hyori</button>
 
-<input type="text" class="search-input" placeholder="Cari produk..." onkeyup="searchProduct(this.value)">
+      <select class="filter-btn" onchange="filterByCategory(this.value)">
+        <option value="Semua">Semua Kategori</option>
+        <option value="Sosis">Sosis</option>
+        <option value="Daging">Daging</option>
+        <option value="Nugget">Nugget</option>
+        <option value="Lain-lain">Lain-lain</option>
+      </select>
+
+      <div class="search-box">
+  <input type="text" placeholder="Cari produk..." onkeyup="searchProduct(this.value)">
+  <i class="fas fa-search"></i>
 </div>
+    </div>
 
-<div class="product-grid" id="product-grid"></div>
-<div class="pagination" id="pagination"></div>
+    <div class="product-grid" id="product-grid"></div>
+    <div class="pagination" id="pagination"></div>
 
-</div>
+  </div>
 </section>
 
-<footer>
-<div class="container">
-<div class="footer-grid">
-<div>
-<img src="images/LOGO SPF.png" width="90"><br><br>
-<p style="opacity:.7;font-size:14px;line-height:1.6;">
-Produsen makanan beku berkualitas tinggi untuk keluarga Indonesia.
-</p>
-</div>
+<!-- FOOTER -->
+<footer class="main-footer">
+  <div class="container footer-grid">
 
-<div>
-<h4>Brand</h4>
-<div style="opacity:.7;font-size:14px;line-height:1.8;">
-1688<br>Nagetku<br>Pickets<br>7Hyori
-</div>
-</div>
+    <div>
+      <div class="footer-brand">
+        <img src="images/LOGO SPF.png" class="footer-logo">
+        <h3 class="footer-title">Selera Prima Food</h3>
+      </div>
+      <p class="footer-desc">
+        Produsen makanan beku berkualitas tinggi untuk keluarga Indonesia.
+      </p>
+    </div>
 
-<div>
-<h4>Kategori</h4>
-<div style="opacity:.7;font-size:14px;line-height:1.8;">
-Sosis<br>Daging<br>Nugget<br>Lain-lain
-</div>
-</div>
+    <div>
+      <h4>Kontak</h4>
+      <div class="footer-links">
 
-<div>
-<h4>Kontak</h4>
-<div style="opacity:.7;font-size:14px;line-height:1.8;">
-+62 21 1234 5678<br>
-info@seleraprimafood.com
-</div>
-</div>
-</div>
+        <a href="tel:+6282261612168" class="contact-item">
+          <i class="fas fa-phone"></i>
+          <span>+62 822 6161 2168</span>
+        </a>
 
-<div class="footer-bottom">
-© 2026 Selera Prima Food. All rights reserved.
-</div>
-</div>
+        <a href="mailto:info@seleraprimafood.com" class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>info@seleraprimafood.com</span>
+        </a>
+
+        <a href="https://www.google.com/maps/search/?api=1&query=Jln+Raya+Tengsaw+No.168+Tarikolot+Citeureup+Bogor+16811"
+           target="_blank"
+           class="contact-item">
+          <i class="fas fa-location-dot"></i>
+          <span>Jln Raya Tengsaw No.168 Tarikolot Citeureup Bogor 16811</span>
+        </a>
+
+      </div>
+    </div>
+
+    <div>
+      <h4>Belanja Online</h4>
+      <div class="footer-social">
+        <a href="https://shopee.co.id/" target="_blank" class="ecommerce-icon shopee">
+          <i class="fas fa-bag-shopping"></i>
+        </a>
+        <a href="https://www.tokopedia.com/" target="_blank" class="ecommerce-icon tokopedia">
+          <i class="fas fa-store"></i>
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <h4>Media Sosial</h4>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/seleraprimafood/" target="_blank" class="instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.tiktok.com/@selera.prima.food" target="_blank" class="tiktok">
+          <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="https://youtube.com/@seleraprimafood" target="_blank" class="youtube">
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://wa.me/6282261612168" target="_blank" class="whatsapp-icon">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Selera Prima Food. All rights reserved.
+  </div>
 </footer>
 
+<!-- JAVASCRIPT PRODUK (TIDAK DIUBAH) -->
 <script>
-
 const allProducts = [
 /* ---- PASTE SEMUA 21 PRODUK LO DI SINI (format variants sudah benar) ---- */
 {
@@ -444,13 +370,29 @@ applyFilter();
 }
 
 function applyFilter(){
-currentPage=1;
-filteredData=allProducts.filter(p=>{
-const matchBrand = selectedBrand==='Semua'||p.brand===selectedBrand;
-const matchCategory = selectedCategory==='Semua'||p.category===selectedCategory;
-const matchSearch = p.name.toLowerCase().includes(searchKeyword);
-return matchBrand && matchCategory && matchSearch;
+currentPage = 1;
+
+filteredData = allProducts.filter(p => {
+
+  const matchBrand =
+    selectedBrand === 'Semua' ||
+    p.brand.toLowerCase() === selectedBrand.toLowerCase();
+
+  const matchCategory =
+    selectedCategory === 'Semua' ||
+    p.category.toLowerCase() === selectedCategory.toLowerCase();
+
+  const keyword = searchKeyword.toLowerCase();
+
+  const matchSearch =
+    p.name.toLowerCase().includes(keyword) ||
+    p.brand.toLowerCase().includes(keyword) ||
+    p.category.toLowerCase().includes(keyword) ||
+    p.desc.toLowerCase().includes(keyword);
+
+  return matchBrand && matchCategory && matchSearch;
 });
+
 renderProducts();
 }
 
@@ -501,8 +443,7 @@ pagination.appendChild(btn);
 
 filteredData=allProducts;
 renderProducts();
-
 </script>
-
+<script src="js/slider.js"></script>
 </body>
 </html>
