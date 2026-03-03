@@ -1,463 +1,315 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ - Selera Prima Food</title>
-    <style>
-        :root {
-            --primary: #eb2525;
-            --secondary: #af1e1e;
-            --accent: #eff6ff;
-            --background: #ffffff;
-            --foreground: #020817;
-            --muted: #f1f5f9;
-            --muted-foreground: #64748b;
-            --border: #e2e8f0;
-            --primary-foreground: #ffffff;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ - Selera Prima Food</title>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: #f8fafc; color: var(--foreground); }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+<link rel="stylesheet" href="asset/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        /* HEADER */
-        .header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            width: 100%;
-            border-bottom: 1px solid var(--border);
-            background-color: var(--background); 
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-        }
+<style>
+body{background:#f8fafc;}
 
-                .nav-container {
-            display: flex;
-            height: 64px;
-            align-items: center;
-            justify-content: space-between;
-        }
+.hero-faq{
+position:relative;
+background:linear-gradient(135deg,#eb2525,#af1e1e);
+padding:80px 0;
+color:white;
+text-align:left;
+}
+.hero-faq::before{
+content:"";
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.25);
+}
+.hero-faq .container{position:relative;z-index:2;}
+.hero-faq h1{font-size:3rem;font-weight:800;margin-bottom:10px;}
+.hero-faq p{font-size:1.2rem;opacity:.9;}
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            color: var(--foreground);
-        }
+.faq-section{padding:60px 0;}
+.category-title{
+margin-top:40px;
+margin-bottom:20px;
+font-size:22px;
+border-left:4px solid #eb2525;
+padding-left:15px;
+font-weight:700;
+}
 
-        .logo {
-            display: flex;
-            height: 40px;
-            width: 40px;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            background-color: var(--primary);
-            color: var(--primary-foreground);
-            font-weight: bold;
-            font-size: 18px;
-        }
+.accordion-item{
+margin-bottom:10px;
+border:1px solid #e2e8f0;
+border-radius:10px;
+background:white;
+overflow:hidden;
+transition:.3s;
+}
+.accordion-header{
+width:100%;
+padding:16px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+cursor:pointer;
+background:none;
+border:none;
+font-size:15px;
+font-weight:600;
+text-align:left;
+}
+.accordion-content{
+max-height:0;
+overflow:hidden;
+transition:max-height .3s ease;
+padding:0 20px;
+color:#64748b;
+font-size:14px;
+line-height:1.6;
+}
+.accordion-item.active{
+border-color:#eb2525;
+box-shadow:0 4px 15px rgba(235,37,37,.08);
+}
+.accordion-item.active .accordion-content{
+max-height:300px;
+padding:0 20px 20px 20px;
+}
+.icon-arrow{
+transition:.3s;
+}
+.accordion-item.active .icon-arrow{
+transform:rotate(180deg);
+color:#eb2525;
+}
 
-        .brand-text { font-size: 20px; font-weight: bold; }
-        .brand-text span { color: var(--foreground); }
-
-        .desktop-nav { display: none; align-items: center; gap: 4px; }
-        @media (min-width: 1024px) { .desktop-nav { display: flex; } }
-
-        .nav-link {
-            text-decoration: none;
-            padding: 8px 12px;
-            font-size: 14px;
-            font-weight: 500;
-            border-radius: 6px;
-            color: var(--muted-foreground);
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            background-color: var(--muted);
-            color: var(--primary);
-        }
-
-        .nav-link.active, .mobile-nav-link.active {
-        background-color: var(--muted) !important;
-        color: var(--primary) !important;
-        font-weight: 700;
-        }
-
-        /* Mobile Toggle */
-        .mobile-toggle {
-            display: block;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 8px;
-            color: var(--foreground);
-        }
-        @media (min-width: 1024px) { .mobile-toggle { display: none; } }
-
-        .mobile-nav {
-            display: none;
-            border-top: 1px solid var(--border);
-            background-color: white;
-            padding: 16px;
-        }
-        .mobile-nav.open { display: block; }
-        .mobile-nav-list { display: flex; flex-direction: column; gap: 4px; }
-        .mobile-nav-link {
-            text-decoration: none;
-            padding: 10px 12px;
-            font-size: 14px;
-            font-weight: 500;
-            border-radius: 6px;
-            color: var(--muted-foreground);
-            cursor: pointer;
-        }
-        .mobile-nav-link.active { background: var(--muted); color: var(--primary); }
-
-
-        /* HERO */
-        .hero-faq {
-            position: relative;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            padding: 80px 0; color: white;
-        }
-        .hero-faq::before {
-            content: ""; position: absolute; inset: 0;
-            background-color: var(--foreground); opacity: 0.3; z-index: 1;
-        }
-        .hero-faq .container { position: relative; z-index: 10; }
-        .hero-faq h1 { font-size: 3rem; font-weight: 800; margin-bottom: 16px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-        .hero-faq p { font-size: 1.25rem; max-width: 600px; opacity: 0.9; }
-
-        /* ACCORDION LOGIC */
-        .accordion-item { margin-bottom: 8px; border: 1px solid var(--border); border-radius: 8px; background: white; transition: 0.3s; }
-        .accordion-header { width: 100%; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: none; border: none; font-size: 16px; font-weight: 600; text-align: left; color: var(--foreground); }
-        .accordion-content { 
-            max-height: 0; overflow: hidden; transition: all 0.3s cubic-bezier(0, 1, 0, 1); 
-            padding: 0 20px; color: var(--muted-foreground); font-size: 14px; line-height: 1.6;
-        }
-        .accordion-item.active { border-color: var(--primary); box-shadow: 0 4px 12px rgba(235, 37, 37, 0.1); }
-        .accordion-item.active .accordion-content { max-height: 1000px; padding-bottom: 16px; transition: all 0.3s cubic-bezier(1, 0, 1, 0); }
-        .icon-arrow { transition: transform 0.3s; }
-        .accordion-item.active .icon-arrow { transform: rotate(180deg); color: var(--primary); }
-
-        h2.category-title { margin-top: 40px; margin-bottom: 20px; font-size: 24px; border-left: 4px solid var(--primary); padding-left: 15px; }
-
-        /* FOOTER */
-        footer {
-            background-color: var(--foreground);
-            color: var(--background);
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 48px;
-            padding-bottom: 24px;
-        }
-
-        .footer-grid {
-            display: grid;
-            gap: 32px;
-        }
-
-        @media (min-width: 768px) {
-            .footer-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (min-width: 1024px) {
-            .footer-grid { grid-template-columns: repeat(4, 1fr); }
-        }
-
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-            justify-content: flex-start;
-        }
-
-        .footer-logo-box {
-            height: 40px;
-            width: 40px;
-            background-color: var(--primary);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 18px;
-            color: var(--primary-foreground);
-        }
-
-        .brand-name { font-size: 18px; font-weight: bold; text-align: left; margin: 0;}
-        .brand-name span { color: var(--primary-foreground); }
-
-        .desc {
-            font-size: 14px;
-            opacity: 0.7;
-            line-height: 1.6;
-            margin: 0;
-            text-align: left;
-            max-width: 300px;
-        }
-
-        footer h4 {
-            font-size: 18px;
-            font-weight: bold;
-            margin: 0 0 16px 0;
-        }
-
-        .link-list, .contact-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            font-size: 14px;
-        }
-
-        .link-list a {
-            color: inherit;
-            text-decoration: none;
-            opacity: 0.7;
-            transition: 0.3s;
-        }
-
-        .link-list a:hover {
-            color: var(--primary);
-            opacity: 1;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            opacity: 0.7;
-        }
-
-        .social-flex {
-            display: flex;
-            gap: 12px;
-        }
-
-        .social-btn {
-            height: 40px;
-            width: 40px;
-            border-radius: 50%;
-            background-color: rgba(37, 99, 235, 0.2);
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .social-btn:hover {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .footer-bottom {
-            margin-top: 40px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 24px;
-            text-align: center;
-            font-size: 14px;
-            opacity: 0.5;
-        }
-    </style>
+.cta-faq{
+padding:70px 0;
+background:white;
+text-align:center;
+}
+.cta-btn{
+display:inline-block;
+padding:14px 30px;
+background:#eb2525;
+color:white;
+border-radius:50px;
+font-weight:600;
+text-decoration:none;
+transition:.3s;
+}
+.cta-btn:hover{
+background:#af1e1e;
+}
+</style>
 </head>
+
 <body>
-    <header class="header">
-        <nav class="nav-container container">
-            <a href="beranda.html" class="brand">
-                <img src="images/LOGO SPF.png" alt="Logo" width="90">
-                <span class="brand-text">Selera Prima <span>Food</span></span>
-            </a>
-            <div class="desktop-nav">
-                <a href="beranda.html" class="nav-link active">Beranda</a>
-                <a href="tentang-kami.html" class="nav-link">Tentang Kami</a>
-                <a href="produk.html" class="nav-link">Produk</a>
-                <a href="artikel.html" class="nav-link">Artikel</a>
-                <a href="resep.html" class="nav-link">Resep</a>
-                <a href="faq.html" class="nav-link">FAQ</a>
-                <a href="kontak.html" class="nav-link">Kontak Kami</a>
-            </div>
-            
-            <button class="mobile-toggle" id="menu-btn">
-                <svg id="icon-menu" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                <svg id="icon-close" style="display:none" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-        </nav>
 
-        <div class="mobile-nav" id="mobile-menu">
-            <div class="mobile-nav-list">
-                <a href="beranda.html" class="mobile-nav-link active">Beranda</a>
-                <a href="tentang-kami.html" class="mobile-nav-link">Tentang Kami</a>
-                <a href="produk.html" class="mobile-nav-link">Produk</a>
-                <a href="artikel.html" class="mobile-nav-link">Artikel</a>
-                <a href="resep.html" class="mobile-nav-link">Resep</a>
-                <a href="faq.html" class="mobile-nav-link">FAQ</a>
-                <a href="kontak.html" class="mobile-nav-link">Kontak Kami</a>
-            </div>
-        </div>
-    </header>
+<!-- HEADER -->
+<header class="header">
+<div class="container nav-container">
+<a href="beranda.html" class="brand">
+<img src="images/LOGO SPF.png" width="85">
+<span class="brand-text">Selera Prima Food</span>
+</a>
+<nav class="desktop-nav">
+<a href="beranda.html" class="nav-link">Beranda</a>
+<a href="tentang-kami.html" class="nav-link">Tentang Kami</a>
+<a href="produk.html" class="nav-link">Produk</a>
+<a href="artikel.html" class="nav-link">Artikel</a>
+<a href="resep.html" class="nav-link">Resep</a>
+<a href="faq.html" class="nav-link">FAQ</a>
+<a href="kontak.html" class="nav-link btn-contact">Kontak</a>
+</nav>
+</div>
+</header>
 
-    <main>
-        <section class="hero-faq">
-            <div class="container">
-                <h1>FAQ</h1>
-                <p>Pertanyaan yang sering diajukan tentang produk dan layanan kami</p>
-            </div>
-        </section>
+<main>
 
-        <section class="py-12" style="padding: 60px 0;">
-            <div class="container max-w-3xl" id="faq-container" style="max-width: 800px;">
-                </div>
-        </section>
-    </main>
+<!-- HERO -->
+<section class="hero-slider" style="height:35vh; min-height:380px;">
+  <div class="slide active" style="background-image:url('images/resep.png')">
+    <div class="hero-content container">
+      <h1>FAQ</h1>
+      <p>Pertanyaan yang sering diajukan tentang produk dan layanan kami.</p>
+    </div>
+  </div>
 
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <div class="brand-logo">
-                        <div class="footer-logo">
-                            <img src="images/LOGO SPF.png" alt="Logo Selera Prima Food" width="90" height="45"></div>
-                        <span class="brand-name">Selera Prima <span>Food</span></span>
-                    </div>
-                    <p class="desc">
-                        Produsen makanan beku berkualitas tinggi. Nugget, sosis, olahan daging, dan lebih banyak lagi untuk keluarga Indonesia.
-                    </p>
-                </div>
+  <div class="slide" style="background-image:url('images/daging.jpg')">
+    <div class="hero-content container">
+      <h1>FAQ</h1>
+      <p>Pertanyaan yang sering diajukan tentang produk dan layanan kami.</p>
+    </div>
+  </div>
 
-                <div>
-                    <h4>Navigasi</h4>
-                    <div class="link-list">
-                        <a href="beranda.html">Beranda</a>
-                        <a href="tentang-kami.html">Tentang Kami</a>
-                        <a href="produk.html">Produk</a>
-                        <a href="artikel.html">Artikel</a>
-                        <a href="resep.html">Resep</a>
-                        <a href="faq.html">FAQ</a>
-                    </div>
-                </div>
+  <div class="slide" style="background-image:url('images/kantor.jpg')">
+    <div class="hero-content container">
+      <h1>FAQ</h1>
+      <p>Pertanyaan yang sering diajukan tentang produk dan layanan kami</p>
+    </div>
+  </div>
 
-                <div>
-                    <h4>Kontak</h4>
-                    <div class="contact-list">
-                        <div class="contact-item"><span>📞</span> +62 21 1234 5678</div>
-                        <div class="contact-item"><span>📧</span> info@seleraprimafood.com</div>
-                        <div class="contact-item"><span>📍</span> Jl. Tengsaw No.168, Tarikolot, Kec. Citeureup, Kabupaten Bogor, Jawa Barat 16811</div>
-                    </div>
-                </div>
+  <div class="slider-dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+</section>
 
-                <div>
-                    <h4>Media Sosial</h4>
-                    <div class="social-flex">
-                        <a href="https://www.instagram.com/seleraprimafood/" class="social-btn" title="instagram">in</a>
-                        <a href="https://www.tiktok.com/@selera.prima.food?_r=1&_t=ZS-92pw6FuTrbJ" class="social-btn" title="tiktok">f</a>
-                        <a href="https://youtube.com/@seleraprimafood?si=_RjDQkebhil65yr2" class="social-btn" title="youtube">yt</a>
-                    </div>
-                </div>
-            </div>
+<!-- FAQ CONTENT -->
+<section class="faq-section">
+<div class="container" style="max-width:800px;" id="faq-container"></div>
+</section>
 
-            <div class="footer-bottom">
-                &copy; 2026 Selera Prima Food. All rights reserved.
-            </div>
-        </div>
-    </footer>
+<!-- CTA -->
+<section class="cta-faq">
+<div class="container">
+<h2 style="font-size:28px;margin-bottom:15px;">
+Masih punya pertanyaan?
+</h2>
+<p style="color:#64748b;margin-bottom:30px;">
+Tim kami siap membantu Anda melalui WhatsApp.
+</p>
+<a href="https://wa.me/6282261612168" target="_blank" class="cta-btn">
+💬 Tanya via WhatsApp
+</a>
+</div>
+</section>
 
-    <script>
-        const faqData = [
-            {
-                category: "Produk",
-                items: [
-                    { q: "Apa saja produk yang ditawarkan Selera Prima Food?", a: "Kami menawarkan berbagai macam produk makanan beku berkualitas tinggi, termasuk nugget ayam, sosis sapi, saikoro beef, beef slice, dan berbagai olahan daging lainnya." },
-                    { q: "Apakah produk Selera Prima Food halal?", a: "Ya, seluruh produk kami telah mendapatkan sertifikasi halal dari MUI. Kami berkomitmen menjaga kehalalan di setiap tahap produksi." },
-                    { q: "Berapa lama masa simpan produk?", a: "Produk kami memiliki masa simpan 6-12 bulan jika disimpan dalam freezer pada suhu -18°C atau lebih rendah." }
-                ]
-            },
-            {
-                category: "Kualitas & Sertifikasi",
-                items: [
-                    { q: "Sertifikasi apa saja yang dimiliki?", a: "Kami memiliki sertifikasi Halal MUI, terdaftar di BPOM RI, sertifikasi ISO 22000, dan menerapkan Good Manufacturing Practice (GMP)." }
-                ]
-            },
-            {
-                category: "Kerjasama",
-                items: [
-                    { q: "Apakah menerima layanan OEM/private label?", a: "Ya, kami menyediakan layanan OEM dan private label untuk mitra bisnis. Kami dapat memproduksi produk sesuai spesifikasi dan merek Anda." }
-                ]
-            }
-        ];
+</main>
 
-        function renderFAQ() {
-            const container = document.getElementById('faq-container');
-            container.innerHTML = faqData.map(section => `
-                <h2 class="category-title">${section.category}</h2>
-                <div class="accordion-group">
-                    ${section.items.map(item => `
-                        <div class="accordion-item">
-                            <button class="accordion-header" onclick="toggleAccordion(this)">
-                                <span>${item.q}</span>
-                                <svg class="icon-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                            </button>
-                            <div class="accordion-content">
-                                <p>${item.a}</p>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-            `).join('');
-        }
+<!-- FOOTER -->
+<footer class="main-footer">
+  <div class="container footer-grid">
 
-        function toggleAccordion(btn) {
-            const currentItem = btn.parentElement;
-            const isOpen = currentItem.classList.contains('active');
-            
-            // Tutup semua accordion yang sedang terbuka
-            document.querySelectorAll('.accordion-item').forEach(item => {
-                item.classList.remove('active');
-            });
+    <div>
+      <div class="footer-brand">
+        <img src="images/LOGO SPF.png" class="footer-logo">
+        <h3 class="footer-title">Selera Prima Food</h3>
+      </div>
+      <p class="footer-desc">
+        Produsen makanan beku berkualitas tinggi untuk keluarga Indonesia.
+      </p>
+    </div>
 
-            // Kalau yang diklik tadi belum kebuka, sekarang buka
-            if (!isOpen) {
-                currentItem.classList.add('active');
-            }
-        }
+    <div>
+      <h4>Kontak</h4>
+      <div class="footer-links">
 
-        renderFAQ();
+        <a href="tel:+6282261612168" class="contact-item">
+          <i class="fas fa-phone"></i>
+          <span>+62 822 6161 2168</span>
+        </a>
 
-        </script>
+        <a href="mailto:info@seleraprimafood.com" class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>info@seleraprimafood.com</span>
+        </a>
 
-    <script>
-    // Aktifkan link navbar berdasarkan halaman saat ini
-    document.addEventListener('DOMContentLoaded', () => {
-    // 1. Ambil nama file dari URL (misal: produk.html)
-    const currentPath = window.location.pathname.split("/").pop();
-    
-    // 2. Cari semua link di navbar
-    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+        <a href="https://www.google.com/maps/search/?api=1&query=Jln+Raya+Tengsaw+No.168+Tarikolot+Citeureup+Bogor+16811"
+           target="_blank"
+           class="contact-item">
+          <i class="fas fa-location-dot"></i>
+          <span>Jln Raya Tengsaw No.168 Tarikolot Citeureup Bogor 16811</span>
+        </a>
 
-    navLinks.forEach(link => {
-        // Bersihin class active dulu biar gak dobel
-        link.classList.remove('active');
-        
-        const href = link.getAttribute('href');
+      </div>
+    </div>
 
-        // 3. Logika pencocokan
-        if (currentPath === href) {
-            link.classList.add('active');
-        } 
-        // Kalau di beranda (index.html atau kosong)
-        else if ((currentPath === "" || currentPath === "index.html") && href === "index.html") {
-            link.classList.add('active');
-        }
-        });
-    });
-    </script>
+    <div>
+      <h4>Belanja Online</h4>
+      <div class="footer-social">
+        <a href="https://shopee.co.id/" target="_blank" class="ecommerce-icon shopee"><i class="fas fa-bag-shopping"></i></a>
+        <a href="https://www.tokopedia.com/" target="_blank" class="ecommerce-icon tokopedia"><i class="fas fa-store"></i></a>
+      </div>
+    </div>
 
+    <div>
+      <h4>Media Sosial</h4>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/seleraprimafood/" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@selera.prima.food" target="_blank" class="tiktok"><i class="fab fa-tiktok"></i></a>
+        <a href="https://youtube.com/@seleraprimafood" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
+        <a href="https://wa.me/6282261612168" target="_blank" class="whatsapp-icon"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Selera Prima Food. All rights reserved.
+  </div>
+</footer>
+
+<script>
+const faqData = [
+{
+category:"Produk",
+items:[
+{q:"Apa saja produk yang ditawarkan Selera Prima Food?",
+a:"Kami menawarkan berbagai macam produk makanan beku berkualitas tinggi, termasuk nugget ayam, sosis sapi, saikoro beef, beef slice, dan berbagai olahan daging lainnya."},
+{q:"Apakah produk Selera Prima Food halal?",
+a:"Ya, seluruh produk kami telah mendapatkan sertifikasi halal MUI dan diproduksi dengan standar keamanan pangan tinggi."},
+{q:"Berapa lama masa simpan produk?",
+a:"Produk memiliki masa simpan 6–12 bulan jika disimpan pada suhu freezer -18°C."}
+]
+},
+{
+category:"Kualitas & Sertifikasi",
+items:[
+{q:"Sertifikasi apa saja yang dimiliki?",
+a:"Kami memiliki sertifikasi Halal MUI, BPOM RI, ISO 22000, serta menerapkan GMP dalam proses produksi."}
+]
+},
+{
+category:"Kerjasama",
+items:[
+{q:"Apakah menerima layanan OEM/private label?",
+a:"Ya, kami menerima layanan OEM dan private label untuk mitra bisnis dengan spesifikasi khusus sesuai kebutuhan Anda."}
+]
+}
+];
+
+function renderFAQ(){
+const container=document.getElementById("faq-container");
+container.innerHTML=faqData.map(section=>`
+<h2 class="category-title">${section.category}</h2>
+${section.items.map(item=>`
+<div class="accordion-item">
+<button class="accordion-header" onclick="toggleAccordion(this)">
+<span>${item.q}</span>
+<i class="fas fa-chevron-down icon-arrow"></i>
+</button>
+<div class="accordion-content">
+<p>${item.a}</p>
+</div>
+</div>
+`).join("")}
+`).join("");
+}
+
+function toggleAccordion(btn){
+const item=btn.parentElement;
+const isOpen=item.classList.contains("active");
+document.querySelectorAll(".accordion-item").forEach(i=>i.classList.remove("active"));
+if(!isOpen){item.classList.add("active");}
+}
+
+renderFAQ();
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+const current=window.location.pathname.split("/").pop();
+document.querySelectorAll('.nav-link').forEach(link=>{
+if(link.getAttribute('href')===current){
+link.classList.add('active');
+}
+});
+});
+</script>
+<script src="js/slider.js"></script>
 </body>
 </html>
