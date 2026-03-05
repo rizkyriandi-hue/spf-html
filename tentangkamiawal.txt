@@ -79,18 +79,18 @@
 
       <div>
         <p style="color:#64748b;line-height:1.8;margin-bottom:18px;">
-          Kami adalah perusahaan produsen makanan beku olahan daging yang berkomitmen menghadirkan produk berkualitas tinggi, higienis, 
-          dan bercita rasa lezat untuk keluarga Indonesia.  
+          Selera Prima Food didirikan dengan visi menyediakan makanan beku berkualitas tinggi 
+          yang aman, halal, dan terjangkau untuk keluarga Indonesia.
         </p>
 
         <p style="color:#64748b;line-height:1.8;margin-bottom:18px;">
-          Dengan pengalaman dalam industri pengolahan daging, kami memproduksi berbagai varian seperti nugget ayam, sosis, 
-          dan olahan daging lainnya yang praktis dan aman dikonsumsi.
+          Kami terus berinovasi menghadirkan produk terbaik mulai dari nugget, sosis, 
+          saikoro, hingga berbagai olahan premium.
         </p>
 
         <p style="color:#64748b;line-height:1.8;">
-         Didukung oleh fasilitas produksi modern dan sistem pengendalian mutu yang ketat, setiap produk kami diproses menggunakan bahan baku pilihan serta melalui standar keamanan pangan yang terjamin. 
-         Kami memahami bahwa kualitas dan konsistensi rasa adalah kunci kepercayaan pelanggan dan mitra distribusi. 
+          Dengan fasilitas produksi modern dan standar keamanan pangan tinggi, 
+          kami memastikan kualitas di setiap tahap produksi.
         </p>
       </div>
 
@@ -119,9 +119,8 @@
       <div class="brand-card">
         <i class="fas fa-eye fa-2x" style="color:#eb2525;margin-bottom:15px;"></i>
         <h4>Visi</h4>
-        <p style="color:#64748b;font-size:20px;">
-        </p>
-          Menjadi perusahaan terdepan dalam bidang industri olahan daging di Indonesia yang unggul dalam inovasi, kualitas dan keamanan pangan serta distribusi nasional.
+        <p style="color:#64748b;font-size:14px;">
+          Menciptakan produk berkualitas, inovatif, dan terpercaya melalui proses produksi yang handal.
         </p>
       </div>
 
@@ -129,18 +128,8 @@
         <i class="fas fa-bullseye fa-2x" style="color:#eb2525;margin-bottom:15px;"></i>
         <h4>Misi</h4>
         <p style="color:#64748b;font-size:14px;">
-        
-        </p>
-          1.	Menjamin kualitas dan keamanan pangan dengan menggunakan bahan baku pilihan melalui proses produksi yang higienis dan terstandarisasi.
-        </p>
-          2.	Menghadirkan inovasi produk yang relevan dengan tren dan kebutuhan konsumen secara dinamis.
-        </p>
-          3.	Membangun jaringan distribusi yang luas dan sistem pemasaran yang efektif.
-        </p>
-          4.	Memberikan nilai tambah bagi mitra distributor, agen, dan pelanggan.
-        </p>
-          5.	Secara berkesinambungan terus meningkatkan kompetensi SDM untuk mendukung pertumbuhan perusahaan yang berkelanjutan.
-
+          Produk inovatif & terpercaya, membangun citra baik perusahaan, 
+          mengembangkan SDM handal, serta menghasilkan nilai tambah berkelanjutan.
         </p>
       </div>
 
@@ -163,7 +152,7 @@
         <i class="fas fa-heart fa-2x" style="color:#eb2525;margin-bottom:15px;"></i>
         <h4>Integritas</h4>
         <p style="color:#64748b;font-size:14px;">
-         Menjalankan bisnis dengan kejujuran dan tanggung jawab.
+          Menjunjung tinggi kejujuran dan kualitas.
         </p>
       </div>
 
@@ -171,7 +160,7 @@
         <i class="fas fa-award fa-2x" style="color:#eb2525;margin-bottom:15px;"></i>
         <h4>Kualitas</h4>
         <p style="color:#64748b;font-size:14px;">
-         Menjaga standar mutu terbaik dari bahan baku hingga distribusi. 
+          Standar tinggi dalam setiap proses produksi.
         </p>
       </div>
 
@@ -179,7 +168,7 @@
         <i class="fas fa-shield-halved fa-2x" style="color:#eb2525;margin-bottom:15px;"></i>
         <h4>Kepercayaan</h4>
         <p style="color:#64748b;font-size:14px;">
-          Membangun hubungan bisnis jangka panjang dan saling menguntungan dengan mitra.
+          Membangun hubungan jangka panjang dengan mitra.
         </p>
       </div>
 
@@ -203,35 +192,28 @@
     </div>
 
     <div>
-  <h4>Kontak</h4>
-  <div class="footer-links">
+      <h4>Kontak</h4>
+      <div class="footer-links">
 
-    <a href="tel:+6282288999168" class="contact-item">
-      <i class="fas fa-phone"></i>
-      <span>Kantor Utama</span>
-      <strong>0822-88-999-168</strong>
-    </a>
+        <a href="tel:+6282261612168" class="contact-item">
+          <i class="fas fa-phone"></i>
+          <span>+62 822 6161 2168</span>
+        </a>
 
-    <a href="tel:+6282261612168" class="contact-item">
-      <i class="fas fa-phone"></i>
-      <span>Sales & Marketing</span>
-      <strong>0822-6161-2168</strong>
-    </a>
+        <a href="mailto:info@seleraprimafood.com" class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>info@seleraprimafood.com</span>
+        </a>
 
-    <a href="mailto:info@seleraprimafood.com" class="contact-item">
-      <i class="fas fa-envelope"></i>
-      <span>info@seleraprimafood.com</span>
-    </a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Jln+Raya+Tengsaw+No.168+Tarikolot+Citeureup+Bogor+16811"
+           target="_blank"
+           class="contact-item">
+          <i class="fas fa-location-dot"></i>
+          <span>Jln Raya Tengsaw No.168 Tarikolot Citeureup Bogor 16811</span>
+        </a>
 
-    <a href="https://www.google.com/maps/search/?api=1&query=Jln+Raya+Tengsaw+No.168+Tarikolot+Citeureup+Bogor+16811"
-       target="_blank"
-       class="contact-item">
-      <i class="fas fa-location-dot"></i>
-      <span>Jl Raya Tengsaw No.168 Tarikolot Citeureup Bogor</span>
-    </a>
-
-  </div>
-</div>
+      </div>
+    </div>
 
     <div>
       <h4>Belanja Online</h4>
