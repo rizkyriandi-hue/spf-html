@@ -357,5 +357,15 @@ document.getElementById("list-view").style.display="block";
 renderGrid(recipes);
 </script>
 <script src="js/slider.js"></script>
+<script>
+
+const menuToggle = document.getElementById("menu-toggle");
+const navMenu = document.getElementById("nav-menu");
+
+menuToggle.addEventListener("click", () => {
+  navMenu.classList.toggle("active");
+});
+
+</script>
 </body>
 </html>

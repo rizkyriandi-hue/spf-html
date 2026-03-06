@@ -25,17 +25,3 @@ dots.forEach((dot,i)=>{
     showSlide(i);
   });
 });
-
-<script>
-
-const toggle = document.getElementById("menu-toggle");
-const mobileMenu = document.getElementById("mobile-menu");
-
-toggle.addEventListener("click", () => {
-
-toggle.classList.toggle("active");
-mobileMenu.classList.toggle("active");
-
-});
-
-</script>
