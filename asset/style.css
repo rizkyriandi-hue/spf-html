@@ -1,5 +1,5 @@
 /* =====================================================
-   ROOT & RESET
+ROOT & RESET
 ===================================================== */
 
 :root{
@@ -18,20 +18,30 @@
   font-family:'Inter',sans-serif;
 }
 
+html,body{
+  overflow-x:hidden;
+}
+
 body{
   background:#ffffff;
   color:var(--text);
-  overflow-x:hidden;
+}
+
+img{
+  max-width:100%;
+  height:auto;
+  display:block;
 }
 
 .container{
   max-width:1200px;
   margin:auto;
   padding:0 20px;
+  width:100%;
 }
 
 /* =====================================================
-   HEADER
+HEADER
 ===================================================== */
 
 .header{
@@ -47,6 +57,7 @@ body{
   align-items:center;
   justify-content:space-between;
   height:64px;
+  flex-wrap:wrap;
 }
 
 .brand{
@@ -94,7 +105,7 @@ body{
 }
 
 /* =====================================================
-   HERO SLIDER
+HERO SLIDER
 ===================================================== */
 
 .hero-slider{
@@ -136,12 +147,14 @@ body{
   z-index:2;
   color:#fff;
   max-width:600px;
+  padding:0 10px;
 }
 
 .hero-content h1{
   font-size:2.8rem;
   font-weight:800;
   margin-bottom:20px;
+  line-height:1.2;
 }
 
 .hero-content p{
@@ -167,7 +180,7 @@ body{
 }
 
 /* =====================================================
-   STATS
+STATS
 ===================================================== */
 
 .stats{
@@ -206,11 +219,11 @@ body{
 }
 
 /* =====================================================
-   BRAND SECTION
+BRAND SECTION
 ===================================================== */
 
 .section{
-  padding:100px 0;
+  padding:70px 0;
   background:#f8fafc;
 }
 
@@ -241,25 +254,23 @@ body{
   text-align:center;
   box-shadow:0 10px 30px rgba(0,0,0,.05);
   transition:.4s;
+  border:1px solid #f1f5f9;
 }
 
 .brand-card:hover{
   transform:translateY(-12px);
   box-shadow:0 30px 60px rgba(0,0,0,.1);
+  border:1px solid #eb2525;
 }
 
 .brand-card img{
   max-width:120px;
+  margin:auto;
   margin-bottom:15px;
-  transition:.4s;
-}
-
-.brand-card:hover img{
-  transform:scale(1.1);
 }
 
 /* =====================================================
-   FOOTER
+FOOTER
 ===================================================== */
 
 .main-footer{
@@ -285,6 +296,15 @@ body{
     grid-template-columns:1fr;
     text-align:center;
   }
+
+  .footer-brand{
+    justify-content:center;
+  }
+
+  .footer-links{
+    align-items:center;
+  }
+
 }
 
 .footer-brand{
@@ -341,11 +361,14 @@ body{
   transform:translateX(5px);
 }
 
-/* SOCIAL */
+/* =====================================================
+SOCIAL
+===================================================== */
 
 .footer-social{
   display:flex;
   gap:12px;
+  margin-top:8px;
 }
 
 .footer-social a{
@@ -355,16 +378,13 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
+  transition:.3s;
   color:white;
   font-size:16px;
-  transition:.3s;
 }
 
-.footer-social a:hover{
-  transform:translateY(-4px) scale(1.08);
-}
+/* brand colors */
 
-/* Brand Colors */
 .instagram{
   background: radial-gradient(circle at 30% 107%, 
   #fdf497 0%, #fd5949 45%, 
@@ -391,6 +411,10 @@ body{
   background:#42b549;
 }
 
+.footer-social a:hover{
+  transform:translateY(-4px) scale(1.08);
+}
+
 .footer-bottom{
   margin-top:40px;
   border-top:1px solid rgba(255,255,255,.1);
@@ -399,112 +423,10 @@ body{
   font-size:12px;
   color:#bfc6d1;
 }
+
 /* =====================================================
-   SOCIAL & ECOMMERCE
+PRODUCT GRID
 ===================================================== */
-
-.footer-social{
-  display:flex;
-  gap:12px;
-  margin-top:8px;
-}
-
-.footer-social a{
-  width:40px;
-  height:40px;
-  border-radius:12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#0f2c5a;
-  transition:.3s;
-  color:white;
-  font-size:16px;
-}
-
-/* WhatsApp Icon */
-.footer-social .whatsapp-icon{
-  background:#25D366;
-}
-
-.footer-social .whatsapp-icon:hover{
-  background:#1ebe5d;
-}
-
-.footer-social a:hover{
-  transform:translateY(-4px);
-}
-
-
-/* Ecommerce Specific */
-
-.ecommerce-icon.shopee{
-  background:#ee4d2d;
-}
-
-.ecommerce-icon.tokopedia{
-  background:#42b549;
-}
-
-
-/* EXTRA POLISH */
-
-.hero-content h1{
-  line-height:1.2;
-}
-
-.brand-card p{
-  margin-top:8px;
-}
-
-.section{
-  padding:70px 0;
-}
-
-.brand-card{
-  border:1px solid #f1f5f9;
-}
-
-.brand-card:hover{
-  border:1px solid #eb2525;
-}
-
-.main-footer{
-  margin-top:0;
-}
-
-/* SOCIAL BRAND COLORS */
-
-.footer-social a{
-  transition:.3s;
-}
-
-/* Instagram */
-.footer-social a.instagram{
-  background: radial-gradient(circle at 30% 107%, 
-  #fdf497 0%, #fdf497 5%, 
-  #fd5949 45%, 
-  #d6249f 60%, 
-  #285AEB 90%);
-}
-
-/* TikTok */
-.footer-social a.tiktok{
-  background:#000000;
-}
-
-/* YouTube */
-.footer-social a.youtube{
-  background:#FF0000;
-}
-
-/* Hover Effect */
-.footer-social a:hover{
-  transform:translateY(-4px) scale(1.08);
-}
-/* ================================
-   PRODUCT PAGE FIX
-================================ */
 
 .product-grid{
   display:grid;
@@ -541,11 +463,6 @@ body{
   max-width:100%;
   max-height:100%;
   object-fit:contain;
-  transition:.4s;
-}
-
-.card:hover img{
-  transform:scale(1.05);
 }
 
 .card-body{
@@ -610,107 +527,39 @@ body{
   color:white;
   border-color:#eb2525;
 }
-/* ===============================
-   PRODUCT FILTER UI POLISH
-================================ */
 
-.filter-btn{
-  padding:10px 18px;
-  border-radius:999px;
-  border:1px solid #e2e8f0;
-  background:#ffffff;
-  cursor:pointer;
-  font-size:13px;
-  font-weight:500;
-  transition:.3s ease;
+/* =====================================================
+MOBILE OPTIMIZATION
+===================================================== */
+
+@media(max-width:768px){
+
+.hero-slider{
+  height:50vh;
 }
 
-.filter-btn:hover{
-  background:#f1f5f9;
-  transform:translateY(-2px);
+.hero-content h1{
+  font-size:1.9rem;
 }
 
-.filter-btn.active{
-  background:var(--primary);
-  color:white;
-  border-color:var(--primary);
-  box-shadow:0 8px 20px rgba(235,37,37,.25);
+.hero-content p{
+  font-size:0.95rem;
 }
 
-select.filter-btn{
-  appearance:none;
-  padding-right:30px;
+.section{
+  padding:50px 0;
 }
 
-/* SEARCH INPUT */
-
-.search-box{
-  position:relative;
+.stat-card{
+  padding:25px;
 }
 
-.search-box input{
-  padding:10px 40px 10px 16px;
-  border-radius:999px;
-  border:1px solid #e2e8f0;
-  font-size:13px;
-  min-width:220px;
-  transition:.3s;
+.brand-card{
+  padding:25px;
 }
 
-.search-box input:focus{
-  outline:none;
-  border-color:var(--primary);
-  box-shadow:0 0 0 3px rgba(235,37,37,.15);
+.footer-social{
+  justify-content:center;
 }
 
-.search-box i{
-  position:absolute;
-  right:15px;
-  top:50%;
-  transform:translateY(-50%);
-  color:#94a3b8;
 }
-/* PRODUCT HERO SLIDER */
-.product-slider{
-  height:35vh;
-  min-height:380px;
-}
-/* HERO TEXT ANIMATION */
-.hero-content{
-  opacity:0;
-  transform:translateY(40px);
-  transition:all .8s ease;
-}
-
-.slide.active .hero-content{
-  opacity:1;
-  transform:translateY(0);
-}
-/* SLIDER DOTS */
-.slider-dots{
-  position:absolute;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:10px;
-  z-index:5;
-}
-
-.dot{
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:rgba(255,255,255,.5);
-  transition:.3s;
-  cursor:pointer;
-}
-
-.dot.active{
-  background:#eb2525;
-  transform:scale(1.2);
-}
-.product-slider .slide{
-  background-attachment:fixed;
-}
-
